@@ -1,0 +1,145 @@
+<template>
+
+    <section class="section promo-hero">
+  <div class="container">
+    <div class="promo-hero-content">
+      <div class="left_column">
+        <div class="text_content">
+          <span>
+            Ready to get paid what you're worth, live where you're treated best,
+            and <span class="bold_text">start living your best life?</span></span>
+          <h1>
+            Get INSTANT Access!
+          </h1>
+          <p>
+            <span class="bold_text">The Pillars of Wisdom is The #1 Playbook</span> for Hacking the Job Market,
+            Building Remote Freedom, and Winning at Life
+          </p>
+        </div>
+        <div class="media_content">
+          <video
+            id="promo-video"
+            class="video-js"
+            controls
+            preload="auto"
+            width="100%"
+            height="50vh"
+            playsinline
+            autoplay
+            muted
+            poster="./images/preview.webp"
+          >
+            <source src="./videos/hero-final-cropped.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <button class="sound_on_btn">
+            <div class="warning">
+              <svg>
+                <use xlink:href="#no-sound-icon"></use>
+              </svg>
+              <span clas="call-to-action">
+                click to turn
+                <br />
+                <span class="capitalize_text"> on sound </span>
+              </span>
+            </div>
+            <div class="sound_on">
+              <svg class="icon">
+                <use xlink:href="#volume-icon"></use>
+              </svg>
+              <span class="text"> Enable sound </span>
+            </div>
+          </button>
+        </div>
+      </div>
+      <div class="right_column">
+        <img
+          data-sizes="auto"
+          data-srcset="
+          ./images/promo-book-480.webp 480w,
+          ./images/promo-book-768.webp 768w,
+          ./images/promo-book-1200.webp 1200w"
+          data-src="./images/promo-book-1200.webp"
+          class="lazyload"
+          width="1200"
+          height="800"
+          alt="book"
+          style="width: 70%; height: auto"
+        />
+        <div class="bottom_content">
+          <div class="rate_wrapper">
+            <div class="stars_content">
+              <svg class="icon">
+                <use xlink:href="#rate-star-icon"></use>
+              </svg>
+              <svg class="icon">
+                <use xlink:href="#rate-star-icon"></use>
+              </svg>
+              <svg class="icon">
+                <use xlink:href="#rate-star-icon"></use>
+              </svg>
+              <svg class="icon">
+                <use xlink:href="#rate-star-icon"></use>
+              </svg>
+              <svg class="icon">
+                <use xlink:href="#rate-star-icon"></use>
+              </svg>
+            </div>
+            <div class="rate_comment">5-Star Rating on <span class="bold_text">Goodreads</span></div>
+          </div>
+          <a
+            class="hero_btn"
+            href="https://shop.thepillarsofwisdom.com/cart/49305684803752:1"
+            target="_blank"
+          >
+            <h2>Get Your Copy Now</h2>
+            <span> Exclusive Offer Awaits </span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="promo_testimonials">
+        <div class="testimonial-card">
+          <img src="./images/pauli1.webp" alt="avatar" />
+          <div class="slide_text">
+            <p>
+              The Pillars of Wisdom dives deeply into the psychological workings
+              of the conformists, individuals for whom “truth is so painful or
+              traumatic that it must always be denied — regardless of the
+              counterevidence.” There is no way to stop the stampede. The
+              important thing is to stay out of the frenzied herd’s way, wait
+              for it to deplete all its resources, and collapse from exhaustion.
+            </p>
+            <span class="author"> Dr. Pauli Brattico </span>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <img src="./images/antony1.webp" alt="avatar" />
+
+          <div class="slide_text">
+            <p>
+              The Pillars of Wisdom is the Manosphere’s ultimate red pill bible
+              and the best book to ever come out of this god forsaken community.
+            </p>
+            <span class="author"> Anthony "Dream" Johnson </span>
+          </div>
+        </div>
+  
+    </div>
+  </div>
+</section>
+
+
+
+</template>
+
+
+<script setup>
+
+</script>
+
+
+<style scoped>
+
+
+</style>

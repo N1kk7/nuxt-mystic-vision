@@ -1,0 +1,61 @@
+@use './/styles/mixins.scss' as mixins;
+
+
+
+:root{
+
+  // Colors
+  --body-color: #000;
+  --body-bg: #fff;
+  --placeholder-color: #999;
+  --selection-bg: #2600ff;
+  --selection-color: #fff;
+  --site-font-size: 12px;
+  --site-line-height: 1.2;
+  --default-font: Arial, Helvetica, sans-serif;
+  --link-color: #2600ff;
+  --link-hover-color: #2600ff;
+
+  --image-btn-text-color: #480074;
+  --title-color: #7A70FF;
+  --btn-color: #5b50d8;
+  --text-color: #480074;
+
+  // --text-color: ;
+
+  // FOR DARK THEME
+
+--dark-light-grey: #222222;
+--dark-grey: rgb(20 20 20);
+--dark-bright-grey: rgb(130 130 130);
+--dark-font-color: rgb(226 227 230);
+--dark-component-color: rgb(34 34 34);
+--dark-border-color: #363738;
+--dark-accent-color: #0d161f;
+--dark-alter-color: rgb(8 12 21);
+
+
+  // Fonts
+  $font-size-base: 1rem; // Базовый размер шрифта
+  $font-size-small: 0.8rem;
+  $font-size-large: 1.3rem;
+
+  $line-height-base: 1.5; // Базовый межстрочный интервал
+  $line-height-small: 1.2;
+  $line-height-large: 1.8;
+
+  // Spacing
+  $spacing-xs: 4px;
+  $spacing-sm: 8px;
+  $spacing-md: 16px;
+  $spacing-lg: 24px;
+  $spacing-xl: 32px;
+
+  // Breakpoints
+  $breakpoint-xs: 480px;
+  $breakpoint-sm: 768px;
+  $breakpoint-md: 1024px;
+  $breakpoint-lg: 1200px;
+  $breakpoint-xl: 1440px;
+  
+}
