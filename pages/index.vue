@@ -1,8 +1,8 @@
 <template>
     <div class="page">
-        <!-- <Header /> -->
         <Header />
         <!-- <Hero /> -->
+         <BookingMain/>
         <Footer/>
 
     </div>
@@ -10,10 +10,8 @@
 
 
 <script setup>
-
-    // import Header from '~/components/header.vue';
-    // import Hero from '~/components/hero.vue';
-    // import Footer from '~/components/footer.vue';
+    // import BookingMain from "~/components/booking/main.vue";
+    // import BookingMain from "./components/booking/main.vue";
 
 
 </script>
