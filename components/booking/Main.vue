@@ -3,8 +3,11 @@
         <div class="booking_wrapper">
             <div class="booking_head">
                 <div class="title">
-                    logo
-                    slide name
+					<img src="/images/sphinks.webp" alt="logo" class="footer-logo">
+
+                    <h2>
+                        {{ titleNames[currentStep] }}
+                    </h2>
 
 
                 </div>
@@ -14,17 +17,62 @@
 
             </div>
             <div class="booking_content">
+                <div class="progress_bar">
+                    <div class="progress_description">
+                        <div class="el">
+                            <svg class="svg-icon"> 
+								<use xlink:href="#schedule-icon"></use>
+
+							</svg>
+                            <span>Setting day</span>
+
+
+                        </div>
+                        <div class="el">
+                            <svg class="svg-icon"> 
+								<use xlink:href="#contact-time"></use>
+
+							</svg>
+                            <span>Setting time</span>
+
+
+                        </div>
+                        <div class="el">
+                            <svg class="svg-icon"> 
+								<use xlink:href="#contact-form"></use>
+
+							</svg>
+                            <span>Contacts</span>
+
+                        </div>
+                    </div>
+                    <!-- <progress id="progress" max="100" value="0"></progress> -->
+                    <div class="progress">
+                        <div class="progress_value">
+
+                        </div>
+
+                    </div>
+                </div>
                 <!-- <BookingSetDate/> -->
                 <!-- <BookingSetTime/> -->
-                 <BookingContactForm/>
+                 <!-- <BookingContactForm/> -->
+                <!-- <component :is="stepComponents[currentStep]"></component> -->
+                 <!-- {{ stepComponents[currentStep] }} -->
+
+                <component :is="stepComponents[currentStep]" />
 
 
             </div>
             <div class="booking_btn">
-                <DefaultBtn>
+                <DefaultBtn
+                    @click="prevStep"
+                >
                     Prev
                 </DefaultBtn>
-                <DefaultBtn>
+                <DefaultBtn
+                    @click="nextStep"
+                >
                     Next
                 </DefaultBtn>
 
@@ -42,7 +90,58 @@
 
 
 <script setup>
-import DefaultBtn from '../shared/DefaultBtn.vue';
+    import DefaultBtn from '../shared/DefaultBtn.vue';
+    import { ref, computed, watch } from 'vue';
+
+
+    const currentStep = ref(0);
+
+    const titleNames = ref([
+        "Setting day",
+        "Setting time",
+        "Contacts"
+    ])
+    const stepComponents = [
+
+        resolveComponent("BookingSetDate"),
+        resolveComponent("BookingSetTime"),
+        resolveComponent("BookingContactForm"),
+
+    ]
+
+    const progress = computed(() => ((currentStep.value + 1) / steps.length) * 100)
+
+    const nextStep = () => {
+
+
+
+        if ( currentStep.value > 1) {
+            return;
+        }
+
+        currentStep.value++;
+
+
+    }
+
+    const prevStep = () => {
+
+        if ( currentStep.value < 1) {
+            return;
+        }
+
+        currentStep.value--;
+
+
+    }
+
+
+    watch(() => {
+        console.log(currentStep.value);
+        
+    })
+    
+
 
 </script>
 
@@ -50,7 +149,8 @@ import DefaultBtn from '../shared/DefaultBtn.vue';
 
 <style lang="scss">
 .booking{
-    width: 100%;
+    width: 80%;
+    margin: 0 auto;
     height: 80vh;
     background-color: #fff;
     display: flex;
@@ -67,6 +167,7 @@ import DefaultBtn from '../shared/DefaultBtn.vue';
         flex-direction: column;
         justify-content: space-between;
         align-items: normal;
+        position: relative;
     }
     .booking_head{
         display: flex;
@@ -74,13 +175,66 @@ import DefaultBtn from '../shared/DefaultBtn.vue';
         justify-content: space-between;
         padding: 1em;
         border-bottom: 1px solid var(--text-color);
+        .title{
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 0.5em;
+        }
+        img{
+            width: 50px;
+        }
 
     }
     .booking_content{
         padding: 1em;
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
+        position: relative;
+        width: 100%;
+        gap: 1em;
+
+      
+
+        .progress_bar{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            width: 100%;
+            gap: 1em;
+
+            .progress_description{
+                width: 100%;
+                height: auto;
+                display: flex;
+                justify-content: space-evenly;
+                align-items: center;
+                .el{
+                    display: flex;
+                    justify-content: center;
+                    color: rgb(224, 224, 224);
+                    align-items: flex-end;
+                    gap: 0.5em;
+                    svg{
+                        width: 25px;
+                        height: 25px;
+                        fill: rgb(224, 224, 224);
+                    }
+                }
+                
+            }
+            .progress{
+                background-color: rgb(224, 224, 224);
+                border-radius: 15px;
+                width: 80%;
+                height: 5px;
+
+            }
+        }
     }
     .booking_btn{
         padding: 1em;

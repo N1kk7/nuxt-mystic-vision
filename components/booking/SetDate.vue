@@ -5,6 +5,7 @@
     :min-date="today"
     :disabled-dates="disabledDates"
     :first-day-of-week="2" 
+    locale="en"  
     is-required
   />
 </template>
