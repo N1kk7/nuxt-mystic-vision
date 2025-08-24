@@ -1,10 +1,12 @@
 <template>
   <div class="slot_wrapper">
     <div v-if="slots.length">
-      <!-- <h3>Слоты:</h3> -->
+      <h2>
+        Select time for {{ userDate }}
+      </h2>
       <ul class="slot_list">
         <li class="slot_item" v-for="slot in slots" :key="slot.utc"
-          :class="{ active_slot: activeSlot === slot.utc }"
+          :class="{ active_slot: modelValue === slot.utc }"
         >
           <button 
             @click="(e) => selectTimeHandler(slot)"
@@ -21,7 +23,7 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, computed } from "vue"
+  import { ref, computed, onMounted } from "vue"
   import dayjs from "dayjs"
   import utc from "dayjs/plugin/utc"
   import timezone from "dayjs/plugin/timezone"
@@ -31,15 +33,40 @@
 
   const selectedDate = ref<string | null>(null);
   const selectedTime = ref<string | null>(null);
-  const activeSlot = ref<string | null>(null);
-  selectedDate.value = "2023-08-30"
+  const userDate = ref<string | null>(null);
+  const modelValue = defineModel<string | null>({ default: null });
+
+  // const modelValue = defineModel<Date | null>({ default: null })
+
+  const isValid = defineModel<boolean>("valid", { default: false });
+
+
+ const props = defineProps<{
+  modelValue: string | null
+  valid: boolean
+  bookingData: {
+    date: any | null
+    time: string | null
+    contact: {
+      name: string
+      email: string
+      phone: string
+      method: string
+    }
+  }
+}>();
+
+
+
+
+  // selectedDate.value = props.bookingData.date
 
 
   const selectTimeHandler = (slot) => {
-    activeSlot.value = slot.utc
+    modelValue.value = slot.utc
     // element.classList.add('active')
 
-    console.log(activeSlot.value);
+    // console.log(modelValue.value);
 
 
 
@@ -49,7 +76,7 @@
     const handleClickOutside = (event: MouseEvent) => {
       const slotWrapper = document.querySelector(".slot_wrapper")
       if (slotWrapper && !slotWrapper.contains(event.target as Node)) {
-        activeSlot.value = null
+        modelValue.value = null
       }
     }
 
@@ -79,8 +106,23 @@
   const slots = computed(() => (selectedDate.value ? generateSlots(selectedDate.value) : []))
 
 
+  watch(modelValue, (val) => {
+    isValid.value = !!val
+  })
+
 onMounted(() => {
-  document.addEventListener("click", handleClickOutside)
+  document.addEventListener("click", handleClickOutside);
+
+  // console.log(props);
+
+  selectedDate.value = props.bookingData.date.toISOString().split("T")[0];
+  userDate.value = new Intl.DateTimeFormat("en-US", {
+    month: "long",  
+    day: "numeric", 
+    year: "numeric", 
+  }).format(props.bookingData.date);
+  // console.log(selectedDate.value, "selectedDate");
+
 })
 
 onBeforeUnmount(() => {
@@ -93,6 +135,9 @@ onBeforeUnmount(() => {
   .slot_wrapper{
     width: 100%;
     height: 100%;
+  }
+  h2{
+    text-align: center;
   }
 .slot_list {
 

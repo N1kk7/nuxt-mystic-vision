@@ -6,7 +6,7 @@
 					<img src="/images/sphinks.webp" alt="logo" class="footer-logo">
 
                     <h2>
-                        {{ titleNames[currentStep] }}
+                        {{ steps[currentStep].titleName }}
                     </h2>
 
 
@@ -48,9 +48,10 @@
                     </div>
                     <!-- <progress id="progress" max="100" value="0"></progress> -->
                     <div class="progress">
-                        <div class="progress_value">
-
-                        </div>
+                        <div 
+                            class="progress_value"
+                            :style="{width: progress + '%'}"
+                        ></div>
 
                     </div>
                 </div>
@@ -60,20 +61,37 @@
                 <!-- <component :is="stepComponents[currentStep]"></component> -->
                  <!-- {{ stepComponents[currentStep] }} -->
 
-                <component :is="stepComponents[currentStep]" />
+                <component 
+                    :is="steps[currentStep].component"
+                    v-model="steps[currentStep].value"
+                    v-model:valid="steps[currentStep].valid"
+                    :booking-data="bookingData"
+                />
+                    <!-- @can-continue="updateStepValidity" -->
+
 
 
             </div>
             <div class="booking_btn">
                 <DefaultBtn
                     @click="prevStep"
+                    v-if="currentStep > 0"
                 >
                     Prev
                 </DefaultBtn>
                 <DefaultBtn
-                    @click="nextStep"
+                    class="step_disabled"
+                    style="pointer-events: none; opacity: 0.5;"
+                    v-if="steps[currentStep].valid === false"
                 >
-                    Next
+                    {{ steps[currentStep].nameBtn }}
+                </DefaultBtn>
+                <DefaultBtn
+                    class="step_active"
+                    v-else
+                    @click="nextStep(steps[currentStep].method)"
+                >
+                    {{ steps[currentStep].nameBtn }}
                 </DefaultBtn>
 
             </div>
@@ -89,38 +107,137 @@
 
 
 
-<script setup>
+<script setup lang="ts">
     import DefaultBtn from '../shared/DefaultBtn.vue';
-    import { ref, computed, watch } from 'vue';
+    import { ref, computed, watch, reactive, shallowRef } from 'vue';
 
 
     const currentStep = ref(0);
 
-    const titleNames = ref([
-        "Setting day",
-        "Setting time",
-        "Contacts"
-    ])
-    const stepComponents = [
+    const selectedDate = ref(null);
+    const selectedTime = ref(null);
+    
+    // const formData = reactive({
+    //     date: null,
+    //     time: null,
+    //     contact: {
+    //         name: "",
+    //         email: "",
+    //         phone: "",
+    //         method: ""
+    //     }
+    // })
 
-        resolveComponent("BookingSetDate"),
-        resolveComponent("BookingSetTime"),
-        resolveComponent("BookingContactForm"),
+    // const stepData = ref([
+    //     {
+    //         id: 0,
+    //         component: resolveComponent("BookingSetDate"),
+    //         titleName: "Setting day",
+    //         field: "date",
+    //         valid: false
 
-    ]
+    //     },
+    //     {
+    //         id: 1,
+    //         component: resolveComponent("BookingSetTime"),
+    //         titleName: "Setting time",
+    //         field: "time",
+    //         valid: false
+    //     },
+    //     {
+    //         id: 2,
+    //         component: resolveComponent("BookingContactForm"),
+    //         titleName: "Contacts",
+    //         field: "contact",
+    //         valid: false
+    //     }
 
-    const progress = computed(() => ((currentStep.value + 1) / steps.length) * 100)
+    // ])
 
-    const nextStep = () => {
+    const steps = reactive([
+        {
+            id: 0,
+            component: shallowRef(resolveComponent("BookingSetDate")),
+            titleName: "Setting day",
+            method: "next-step",
+            nameBtn: "Next",
+            value: null, 
+            valid: false
+        },
+        {
+            id: 1,
+            component: shallowRef(resolveComponent("BookingSetTime")),
+            titleName: "Setting time",
+            method: "next-step",
+            nameBtn: "Next",
+            value: null, 
+            valid: false
+        },
+        {
+            id: 2,
+            component: shallowRef(resolveComponent("BookingContactForm")),
+            titleName: "Contacts",
+            method: "send-data",
+            nameBtn: "Send",
+            value: {
+            name: "",
+            email: "",
+            phone: "",
+            method: ""
+            },
+            valid: false
+        }
+        ])
+  
+
+    const progress = computed(() => ((currentStep.value + 1) / steps.length) * 100);
 
 
+    const bookingData = computed(() => ({
+        date: steps[0].value,
+        time: steps[1].value,
+        contact: steps[2].value
+    }));
+
+    watch(steps, () => {
+        console.log(
+            "recieved props",
+            steps[currentStep.value].value,
+            steps[currentStep.value].valid
+        );
+    })
+
+//     const progress = computed(() => {
+//   if (!steps.value?.length) return 0
+//   return ((currentStep.value + 1) / steps.value.length) * 100
+// })
+
+
+    // console.log(progress.value);
+    // watch(progress, (newVal, oldVal) => {
+    //     console.log("Прогресс изменился:", oldVal, "→", newVal)
+    // })
+
+
+    const fetchDataHandler = () => {
+        console.log("fetchDataHandler");
+    }
+
+    const nextStep = (method: string) => {
 
         if ( currentStep.value > 1) {
             return;
         }
 
-        currentStep.value++;
-
+        switch (method) {
+            case "next-step":
+                currentStep.value++;
+                break;
+            case "send-data":
+                fetchDataHandler();
+                // currentStep.value++ ;
+                break;
+        }
 
     }
 
@@ -130,16 +247,39 @@
             return;
         }
 
+        if (currentStep.value === 1) {
+            steps[0].value = null;
+            steps[1].value = null;
+            steps[0].valid = false;
+        }
+
+        if (currentStep.value === 2) {
+            steps[1].value = null;
+            steps[1].valid = false;
+            steps[2].value = {
+                name: "",
+                email: "",
+                phone: "",
+                method: ""
+            };
+        }
+
         currentStep.value--;
 
 
     }
 
+    // const updateStepValidity = (isValid: boolean) => {
+    //     if (isValid) {
+    //         nextStep();
+    //     }
+    // }
 
-    watch(() => {
-        console.log(currentStep.value);
+
+    // watch(() => {
+    //     console.log(currentStep.value);
         
-    })
+    // })
     
 
 
@@ -158,7 +298,7 @@
     justify-content: center;
     .booking_wrapper{
         width: 80vw;
-        height: auto;
+        height: 70vh;
         min-height: 50vh;
         margin: 0 auto;
         border: 1px solid var(--text-color);
@@ -194,6 +334,7 @@
         justify-content: center;
         position: relative;
         width: 100%;
+        height: inherit;
         gap: 1em;
 
       
@@ -233,6 +374,13 @@
                 width: 80%;
                 height: 5px;
 
+            }
+            .progress_value{
+                background-color: var(--text-color);
+                border-radius: 15px;
+                // width: 0%;
+                height: 5px;
+                transition: all ease 0.3s;
             }
         }
     }

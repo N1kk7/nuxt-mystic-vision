@@ -52,7 +52,7 @@
 
 
 
-    <button type="submit"> Send</button>
+    <!-- <button type="submit"> Send</button> -->
   </form>
 </template>
 
@@ -94,21 +94,21 @@ const validate = () => {
   let valid = true
   // имя
   if (!form.name || form.name.length < 2) {
-    errors.name = "Имя должно быть минимум 2 символа"
+    errors.name = "The name should be at least 2 characters"
     valid = false
   } else errors.name = ""
 
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
   if (!emailRegex.test(form.email)) {
-    errors.email = "Введите корректный email"
+    errors.email = "Enter a valid email"
     valid = false
   } else errors.email = ""
 
 
   const phoneRegex = /^[\d\s()+-]{6,20}$/
   if (!phoneRegex.test(form.phone)) {
-    errors.phone = "Введите корректный телефон"
+    errors.phone = "Enter a valid phone number"
     valid = false
   } else errors.phone = ""
 
@@ -136,9 +136,11 @@ const contactOptions = [
 <style scoped lang="scss">
 .contact_form {
   width: 400px;
+  height: -webkit-fill-available;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 1.5em;
 }
 
