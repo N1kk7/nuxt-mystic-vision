@@ -19,7 +19,7 @@ export default defineEventHandler(async (event) => {
 
     switch(method) {
         case "GET":
-            
+
             if (query.method === "getAvailableSlots") {
                 return await getAvailableSlots(offset);
             } else if (query.method === "getAllCallbacks") {
@@ -28,6 +28,12 @@ export default defineEventHandler(async (event) => {
 
         break;
         case "POST":
+
+            if(query.method === "addCallback") {
+                return await addCallback(event);
+            } else if (query.method === "reserveSlot") {
+                return await reserveSlot(event);
+            }
 
         break;
         case "PUT":
