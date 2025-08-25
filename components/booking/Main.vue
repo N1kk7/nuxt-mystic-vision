@@ -17,7 +17,10 @@
 
             </div>
             <div class="booking_content">
-                <div class="progress_bar">
+                <div 
+                    class="progress_bar"
+                    v-if="currentStep < 3"
+                >
                     <div class="progress_description">
                         <div class="el">
                             <svg class="svg-icon"> 
@@ -67,12 +70,16 @@
                     v-model:valid="steps[currentStep].valid"
                     :booking-data="bookingData"
                 />
+          
                     <!-- @can-continue="updateStepValidity" -->
 
 
 
             </div>
-            <div class="booking_btn">
+            <div 
+                class="booking_btn"
+                v-if="currentStep < 3"
+            >
                 <DefaultBtn
                     @click="prevStep"
                     v-if="currentStep > 0"
@@ -95,6 +102,25 @@
                 </DefaultBtn>
 
             </div>
+            <div 
+                class="discount_btn"
+                v-if="currentStep === 3"
+            >
+                <DefaultBtn
+                    class="decline btn"
+                    @click="nextStep('next-step')"
+                >
+                    No, thanks
+                </DefaultBtn>
+                <DefaultBtn
+                    class="accept btn"
+                    @click="nextStep('next-step')"
+
+                >
+                    Order now
+                </DefaultBtn>
+
+            </div>
 
         </div>
       
@@ -109,13 +135,13 @@
 
 <script setup lang="ts">
     import DefaultBtn from '../shared/DefaultBtn.vue';
-    import { ref, computed, watch, reactive, shallowRef } from 'vue';
+    import { ref, computed, watch, reactive, markRaw } from 'vue';
 
 
     const currentStep = ref(0);
 
-    const selectedDate = ref(null);
-    const selectedTime = ref(null);
+    // const selectedDate = ref(null);
+    // const selectedTime = ref(null);
     
     // const formData = reactive({
     //     date: null,
@@ -157,7 +183,7 @@
     const steps = reactive([
         {
             id: 0,
-            component: shallowRef(resolveComponent("BookingSetDate")),
+            component: markRaw(resolveComponent("BookingSetDate") as Component),
             titleName: "Setting day",
             method: "next-step",
             nameBtn: "Next",
@@ -166,7 +192,7 @@
         },
         {
             id: 1,
-            component: shallowRef(resolveComponent("BookingSetTime")),
+            component: markRaw(resolveComponent("BookingSetTime") as Component),
             titleName: "Setting time",
             method: "next-step",
             nameBtn: "Next",
@@ -175,28 +201,44 @@
         },
         {
             id: 2,
-            component: shallowRef(resolveComponent("BookingContactForm")),
+            component: markRaw(resolveComponent("BookingContactForm") as Component ),
             titleName: "Contacts",
-            method: "send-data",
-            nameBtn: "Send",
-            value: {
-            name: "",
-            email: "",
-            phone: "",
-            method: ""
-            },
+            method: "next-step",
+            nameBtn: "Next",
+            value: null,
+            valid: false
+        },
+        {
+             id: 3,
+            component: markRaw(resolveComponent("BookingDiscount") as Component ),
+            titleName: "Discount",
+            method: "next-step",
+            nameBtn: "Next",
+            value: null,
+            valid: false
+        },
+        {
+            id: 4,
+            component: markRaw(resolveComponent("BookingSummary") as Component ),
+            titleName: "Summary",
+            method: "next-step",
+            nameBtn: "Next",
+            value: null,
             valid: false
         }
         ])
+
   
 
-    const progress = computed(() => ((currentStep.value + 1) / steps.length) * 100);
+    const progress = computed(() => ((currentStep.value + 1) / 3) * 100);
 
 
     const bookingData = computed(() => ({
         date: steps[0].value,
         time: steps[1].value,
-        contact: steps[2].value
+        contact: steps[2].value,
+        // userName: steps[2].value.name
+        // orderBook: steps[3].value
     }));
 
     watch(steps, () => {
@@ -207,36 +249,42 @@
         );
     })
 
-//     const progress = computed(() => {
-//   if (!steps.value?.length) return 0
-//   return ((currentStep.value + 1) / steps.value.length) * 100
-// })
-
-
-    // console.log(progress.value);
-    // watch(progress, (newVal, oldVal) => {
-    //     console.log("Прогресс изменился:", oldVal, "→", newVal)
-    // })
-
 
     const fetchDataHandler = () => {
-        console.log("fetchDataHandler");
+        // console.log('inside fetch')
+
+        // console.log(steps[2]);
+        // const selectedDate = steps[0].value;
+        // const selectedTime = steps[1].value;
+        // const filledForm = steps[2].value;
+        // console.log("fetchDataHandler");
+        // console.log(
+        //     selectedDate,
+        //     selectedTime,
+        //     filledForm
+        // )
     }
 
     const nextStep = (method: string) => {
 
-        if ( currentStep.value > 1) {
-            return;
-        }
+        console.log("nextStep", method);
+
+       
 
         switch (method) {
             case "next-step":
                 currentStep.value++;
                 break;
             case "send-data":
+                console.log('inside send-data');
                 fetchDataHandler();
+                
                 // currentStep.value++ ;
                 break;
+        }
+
+         if ( currentStep.value > 1) {
+            return;
         }
 
     }
@@ -256,6 +304,7 @@
         if (currentStep.value === 2) {
             steps[1].value = null;
             steps[1].valid = false;
+            steps[2].valid = false;
             steps[2].value = {
                 name: "",
                 email: "",
@@ -267,6 +316,29 @@
         currentStep.value--;
 
 
+    }
+
+
+    const createCallback = async () => {
+
+        try{
+
+            const res = await fetch('/api/bookingCall', {
+                method: 'POST',
+                body: JSON.stringify({
+                    name: 'test',
+                    contact: 'test',
+                    dateCallback: '2025-08-25T12:00:00.000Z',
+                    orderTime: '10:00-11:00',
+                    discountEndAt: '2025-08-30T23:59:59.000Z'
+                })
+
+            })
+
+        } catch (error) {
+            console.log(error);
+
+        }
     }
 
     // const updateStepValidity = (isValid: boolean) => {
@@ -308,6 +380,8 @@
         justify-content: space-between;
         align-items: normal;
         position: relative;
+        overflow: hidden;
+
     }
     .booking_head{
         display: flex;
@@ -392,6 +466,55 @@
         border-top: 1px solid var(--text-color);
         gap: 1em;
 
+    }
+     .discount_btn{
+        display: flex;
+        justify-content: flex-end;
+        position: absolute;
+        align-items: center;
+        width: 100%;
+        padding: 1em;
+        gap: 1em;
+        bottom: 0;
+        left: 0;
+
+        .btn{
+            padding: 0.5em 1em;
+            border-radius: 5px;
+            color: black;
+            border: 1px solid var(--text-color);
+            transition: all ease 0.3s;
+            font-weight: bold;
+            cursor: pointer;
+
+
+        }
+
+        .accept{
+            @media screen and (min-width: 1024px) {
+                &:hover{
+                    background: rgb(153, 255, 0);
+                    transition: all ease 0.3s;
+                    border: 1px solid transparent;
+
+
+                }
+                
+            }
+        }
+        .decline{
+        
+            @media screen and (min-width: 1024px) {
+                &:hover{
+                    background: rgb(255, 0, 0);
+                    transition: all ease 0.3s;
+                    color: white;
+                    border: 1px solid transparent;
+
+                    
+                }
+            }
+        }
     }
 }
 

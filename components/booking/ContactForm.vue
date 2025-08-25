@@ -1,140 +1,123 @@
-<template>
-  <form class="contact_form" @submit.prevent="handleSubmit">
+<!-- @submit.prevent="handleSubmit" -->
+    <!-- <button type="submit"> Send</button> -->
 
-    <div class="form_group">
+<template>
+  <div class="contact_modelValue">
+    <div class="modelValue_group">
       <input
         type="text"
-        v-model="form.name"
-        required
+        v-model="localValue.name"
         @focus="focused.name = true"
         @blur="focused.name = false"
+        @input="validate"
       />
-      <label :class="{ active: focused.name || form.name }">Name</label>
+      <label :class="{ active: focused.name || localValue.name }">Name</label>
       <span class="error" v-if="errors.name">{{ errors.name }}</span>
     </div>
 
-
-    <div class="form_group">
+    <div class="modelValue_group">
       <input
         type="email"
-        v-model="form.email"
-        required
+        v-model="localValue.email"
         @focus="focused.email = true"
         @blur="focused.email = false"
+        @input="validate"
       />
-      <label :class="{ active: focused.email || form.email }">Email</label>
+      <label :class="{ active: focused.email || localValue.email }">Email</label>
       <span class="error" v-if="errors.email">{{ errors.email }}</span>
     </div>
 
-
-    <div class="form_group">
+    <div class="modelValue_group">
       <input
         type="tel"
-        v-model="form.phone"
-        required
+        v-model="localValue.phone"
         @focus="focused.phone = true"
         @blur="focused.phone = false"
+        @input="validate"
       />
-      <label :class="{ active: focused.phone || form.phone }">Phone</label>
+      <label :class="{ active: focused.phone || localValue.phone }">Phone</label>
       <span class="error" v-if="errors.phone">{{ errors.phone }}</span>
     </div>
 
+    <div class="switch-contents">
+      <input id="layout-single" type="radio" value="telegram" name="layout" v-model="localValue.method" checked>
+      <label class="radio_label" for="layout-single">Telegram</label>
 
+      <input id="layout-column" type="radio" value="whatsapp" name="layout" v-model="localValue.method">
+      <label class="radio_label" for="layout-column">WhatsApp</label>
 
-
-<div class="switch-contents">
-  <input id="layout-single" type="radio" name="layout" checked><label class="radio_label" for="layout-single">Telegram</label>
-  <input id="layout-column" type="radio" name="layout"><label class="radio_label" for="layout-column">WhatsApp</label>
-  <input id="layout-card" type="radio" name="layout"><label class="radio_label" for="layout-card">Phone</label>
-</div>
-
-
-
-
-
-    <!-- <button type="submit"> Send</button> -->
-  </form>
+      <input id="layout-card" type="radio" value="phone" name="layout" v-model="localValue.method">
+      <label class="radio_label" for="layout-card">Phone</label>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from "vue"
+import { reactive, ref, watch } from "vue";
+
+interface ContactData {
+  name: string;
+  email: string;
+  phone: string;
+  method: string;
+}
 
 
-const form = reactive({
+const emit = defineEmits<{
+  (e: 'update:modelValue', value: ContactData): void
+  (e: 'update:valid', value: boolean): void
+}>()
+
+
+const localValue = reactive<ContactData>({
   name: "",
   email: "",
   phone: "",
+  method: "telegram",
 })
 
-const contactMethod = ref("telegram") 
+const valid = ref(false)
+const errors = reactive({ name: "", email: "", phone: "" })
+const focused = reactive({ name: false, email: false, phone: false })
 
 
-// const contactOptions = [
-//   { label: "Telegram", value: "telegram" },
-//   { label: "WhatsApp", value: "whatsapp" },
-//   { label: "Телефон", value: "phone" },
-// ]
-
-
-const focused = reactive({
-  name: false,
-  email: false,
-  phone: false,
-})
-
-
-const errors = reactive({
-  name: "",
-  email: "",
-  phone: "",
-})
-
+watch(
+  localValue,
+  (val) => emit("update:modelValue", { ...val }),
+  { deep: true }
+)
 
 const validate = () => {
-  let valid = true
-  // имя
-  if (!form.name || form.name.length < 2) {
+  let check = true
+
+  if (!localValue.name || localValue.name.length < 2) {
     errors.name = "The name should be at least 2 characters"
-    valid = false
+    check = false;
+    return;
   } else errors.name = ""
 
-
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-  if (!emailRegex.test(form.email)) {
+  if (!emailRegex.test(localValue.email)) {
     errors.email = "Enter a valid email"
-    valid = false
+    check = false
+    return;
   } else errors.email = ""
 
-
   const phoneRegex = /^[\d\s()+-]{6,20}$/
-  if (!phoneRegex.test(form.phone)) {
+  if (!phoneRegex.test(localValue.phone)) {
     errors.phone = "Enter a valid phone number"
-    valid = false
+    check = false
+    return;
   } else errors.phone = ""
 
-  return valid
+  valid.value = check
+  emit("update:valid", valid.value)
 }
-
-
-const handleSubmit = () => {
-  if (validate()) {
-    alert(`Форма отправлена! Данные:\n${JSON.stringify(form, null, 2)}`)
-
-    //fetch
-
-  }
-}
-
-
-const contactOptions = [
-  { label: "Telegram", value: "telegram" },
-  { label: "WhatsApp", value: "whatsapp" },
-  { label: "Телефон", value: "phone" },
-]
 </script>
 
+
 <style scoped lang="scss">
-.contact_form {
+.contact_modelValue {
   width: 400px;
   height: -webkit-fill-available;
   margin: 0 auto;
@@ -144,7 +127,7 @@ const contactOptions = [
   gap: 1.5em;
 }
 
-.form_group {
+.modelValue_group {
   position: relative;
 }
 
@@ -208,6 +191,8 @@ label.active {
     border-bottom: 2px solid #3498db;
     cursor: default;
   }
+
+
 }
 label{
   display: inline-block;

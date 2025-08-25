@@ -1,8 +1,4 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
   provider = "prisma-client-js"
@@ -17,15 +13,36 @@ datasource db {
 model Callback {
   id            String   @id @default(uuid())
   name          String
-  contact       String
+  email         String   @unique
+  phone         String
   dateCallback  DateTime 
-  orderTime     String  
-  testing       Boolean   
-  status    Status     @default(WAITING_CALL)
-  createdAt DateTime   @default(now())
+  timeSlot      String
+  contactMethod ContactMethod @default(GOOGLE_MEET)
+  orderTime     String 
+  comment       String?   
+  status        Status     @default(WAITING_CALL)
+  discountEndAt DateTime? 
+  createdAt     DateTime   @default(now())
+  reservations  CallbackReservation[]
+}
+
+model CallbackReservation {
+  id        String   @id @default(uuid())
+  date      DateTime
+  time      String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  callback  Callback? @relation(fields: [callbackId], references: [id])
+  callbackId String?
 }
 
 enum Status {
   WAITING_CALL
   PURCHASED
+}
+
+enum ContactMethod {
+  PHONE_CALL
+  GOOGLE_MEET
+  SOMEWHERE_ELSE
 }
