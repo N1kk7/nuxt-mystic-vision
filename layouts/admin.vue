@@ -27,9 +27,9 @@
               <span
                 class="font-semibold transition-all duration-200 ease-nav-brand"
               >
-                Панель керування
+                Admin dashboard
               </span>
-              <span> https://www.korzinka.in.ua </span>
+              <span> Mystic visions </span>
             </div>
           </div>
         </div>
@@ -62,7 +62,7 @@
                   <span
                     class="ml-1 duration-300 opacity-100 pointer-events-none ease"
                   >
-                    Головна
+                    Overview
                   </span>
                 </div>
               </NuxtLink>
@@ -88,7 +88,7 @@
                   <span
                     class="ml-1 duration-300 opacity-100 pointer-events-none ease"
                   >
-                    Аналітика
+                    Analytics
                   </span>
                 </div>
               </NuxtLink>
@@ -114,7 +114,7 @@
                   <span
                     class="ml-1 duration-300 opacity-100 pointer-events-none ease"
                   >
-                    Покупці
+                    Buyers
                   </span>
                 </div>
               </NuxtLink>
@@ -143,7 +143,7 @@
                   <span
                     class="ml-1 duration-300 opacity-100 pointer-events-none ease"
                   >
-                    Повідомлення
+                    Notifications
                   </span>
                 </div>
               </NuxtLink>
@@ -153,7 +153,7 @@
               class="mt-0.5 w-full"
               @click="closeSidebar(), (activePage = 'orders')"
             >
-              <NuxtLink to="/admin/orders">
+              <NuxtLink to="/admin/booking">
                 <div
                   class="py-[0.675rem] text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors rounded-lg font-semibold text-slate-700"
                   :class="{
@@ -169,7 +169,7 @@
                   <span
                     class="ml-1 duration-300 opacity-100 pointer-events-none ease"
                   >
-                    Замовлення
+                    Booking a call's
                   </span>
                 </div>
               </NuxtLink>
@@ -185,9 +185,9 @@
               class="mt-0.5 w-full"
               @click="closeSidebar(), (activePage = 'payment')"
             >
-              <NuxtLink to="/admin/payment">
+              <!-- <NuxtLink to="/admin/payment"> -->
                 <div
-                  class="py-[0.675rem] text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors rounded-lg font-semibold text-slate-700"
+                  class="opacity-30 py-[0.675rem] text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors rounded-lg font-semibold text-slate-700"
                   :class="{
                     'text-white bg-[var(--primary-color)]':
                       activePage === 'payment',
@@ -204,19 +204,19 @@
                   <span
                     class="ml-1 duration-300 opacity-100 pointer-events-none ease"
                   >
-                    Оплата
+                    Payments
                   </span>
                 </div>
-              </NuxtLink>
+              <!-- </NuxtLink> -->
             </li>
 
             <li
               class="mt-0.5 w-full"
               @click="closeSidebar(), (activePage = 'products')"
             >
-              <NuxtLink to="/admin/products">
+              <!-- <NuxtLink to="/admin/products"> -->
                 <div
-                  class="py-[0.675rem] text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors rounded-lg font-semibold text-slate-700"
+                  class="opacity-30 py-[0.675rem] text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors rounded-lg font-semibold text-slate-700"
                   :class="{
                     'text-white bg-[var(--primary-color)]':
                       activePage === 'products',
@@ -230,36 +230,36 @@
                   <span
                     class="ml-1 duration-300 opacity-100 pointer-events-none ease"
                   >
-                    Товари
+                    Products
                   </span>
                 </div>
-              </NuxtLink>
+              <!-- </NuxtLink> -->
             </li>
 
             <li
               class="mt-0.5 w-full"
               @click="closeSidebar(), (activePage = 'settings')"
             >
-              <NuxtLink to="/admin/settings">
+              <!-- <NuxtLink to="/admin/settings"> -->
                 <div
-                  class="py-[0.675rem] text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors rounded-lg font-semibold text-slate-700"
+                  class="opacity-30 py-[0.675rem] text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors rounded-lg font-semibold text-slate-700"
                   :class="{
                     'text-white bg-[var(--primary-color)]':
                       activePage === 'settings',
                   }"
                 >
                   <div
-                    class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-1.5"
+                    class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-1.5 "
                   >
                     <img src="@/public/img/icons/setting.png" alt="option" />
                   </div>
                   <span
                     class="ml-1 duration-300 opacity-100 pointer-events-none ease"
                   >
-                    Налаштування
+                    Settings
                   </span>
                 </div>
-              </NuxtLink>
+              <!-- </NuxtLink> -->
             </li>
           </ul>
         </div>
@@ -277,11 +277,12 @@
           <!-- <img class="w-1/2 mx-auto" src="./assets/img/illustrations/icon-documentation.svg" alt="sidebar illustrations" /> -->
           <div class="flex-auto w-full p-4 pt-0 text-center">
             <div class="transition-all duration-200 ease-nav-brand">
-              <h6 class="mb-0 dark:text-white text-slate-700">Need help?</h6>
+              <!-- <h6 class="mb-0 dark:text-white text-slate-700">Need help?</h6> -->
               <p
                 class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60"
               >
-                Please check our docs
+                <!-- Please check our docs -->
+                 Buttons for control third parties services:
               </p>
             </div>
           </div>
@@ -290,14 +291,14 @@
           href="https://www.creative-tim.com/learning-lab/tailwind/html/quick-start/argon-dashboard/"
           target="_blank"
           class="inline-block w-full px-8 py-2 mb-4 text-xs font-bold leading-normal text-center text-white capitalize transition-all ease-in rounded-lg shadow-md bg-slate-700 bg-150 hover:shadow-xs hover:-translate-y-px"
-          >Documentation</a
+          >LINK</a
         >
         <!-- pro btn  -->
         <a
           class="inline-block w-full px-8 py-2 text-xs font-bold leading-normal text-center text-white align-middle transition-all ease-in bg-blue-500 border-0 rounded-lg shadow-md select-none bg-150 bg-x-25 hover:shadow-xs hover:-translate-y-px"
           href="https://www.creative-tim.com/product/argon-dashboard-pro-tailwind?ref=sidebarfree"
           target="_blank"
-          >Upgrade to pro</a
+          >Exit</a
         >
       </div>
     </aside>
@@ -327,10 +328,14 @@
 
       <!-- :tooltipProps="tooltipProps"  -->
     </main>
-    <Tooltips v-if="showTooltip" :tooltipStatus="tooltipStatus">
+
+
+    <!-- <Tooltips v-if="showTooltip" :tooltipStatus="tooltipStatus">
       {{ tooltipMessage }}
-    </Tooltips>
-    <Modal @tooltip="tooltip">
+    </Tooltips> -->
+
+
+    <!-- <Modal @tooltip="tooltip">
       <template #default="{ openModal, closeModal }">
         <component
           :is="currentModal"
@@ -339,7 +344,9 @@
           :closeModal="closeModal"
         />
       </template>
-    </Modal>
+    </Modal> -->
+
+
   </div>
 </template>
 

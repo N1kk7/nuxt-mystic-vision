@@ -1,21 +1,34 @@
 <template>
-  <div class="slot_wrapper">
-    <div v-if="slots.length">
+  <div 
+    class="loader"
+    v-if="loader"
+  >
+    <span>
+      Loading...
+    </span>
+  </div>
+  <div 
+    class="slot_wrapper"
+    v-else
+  >
+    <div v-if="slots && slots.length">
       <h2>
         Select time for {{ userDate }}
       </h2>
       <ul class="slot_list">
-        <li class="slot_item" v-for="slot in slots" :key="slot.utc"
-          :class="{ active_slot: modelValue === slot.utc }"
+        <li class="slot_item" v-for="(slot, index) in slots" :key="index"
+          :class="{ active_slot: modelValue === slot }"
         >
+          <!-- {{ console.log(slot, "slot") }} -->
+
+
           <button 
             @click="(e) => selectTimeHandler(slot)"
           >
-            {{ slot.local }}
+            {{ slot }}
 
 
           </button>
-          <!-- Мексика: {{ slot.mexico }} | Локально: {{ slot.local }} | UTC: {{ slot.utc }} -->
         </li>
       </ul>
     </div>
@@ -35,10 +48,13 @@
   const selectedTime = ref<string | null>(null);
   const userDate = ref<string | null>(null);
   const modelValue = defineModel<string | null>({ default: null });
+  const slots = ref([]);
 
   // const modelValue = defineModel<Date | null>({ default: null })
 
   const isValid = defineModel<boolean>("valid", { default: false });
+
+  const loader = ref(true);
 
 
  const props = defineProps<{
@@ -57,19 +73,8 @@
 }>();
 
 
-
-
-  // selectedDate.value = props.bookingData.date
-
-
   const selectTimeHandler = (slot) => {
-    modelValue.value = slot.utc
-    // element.classList.add('active')
-
-    // console.log(modelValue.value);
-
-
-
+    modelValue.value = slot
 
   }
 
@@ -81,39 +86,61 @@
     }
 
 
-  function generateSlots(date: string) {
-    const slots: { utc: string; mexico: string; local: string }[] = []
+  // function generateSlots(date: string) {
+  //   const slots: { utc: string; mexico: string; local: string }[] = []
 
-    const startHour = 8
-    const endHour = 16
-    const stepMinutes = 30
+  //   const startHour = 8
+  //   const endHour = 16
+  //   const stepMinutes = 30
 
-    for (let hour = startHour; hour < endHour; hour++) {
-      for (let minute = 0; minute < 60; minute += stepMinutes) {
-        const slotMexico = dayjs.tz(`${date} ${hour}:${minute}`, "YYYY-MM-DD H:m", "America/Mexico_City")
+  //   for (let hour = startHour; hour < endHour; hour++) {
+  //     for (let minute = 0; minute < 60; minute += stepMinutes) {
+  //       const slotMexico = dayjs.tz(`${date} ${hour}:${minute}`, "YYYY-MM-DD H:m", "America/Mexico_City")
 
-        slots.push({
-          utc: slotMexico.utc().format(),
-          mexico: slotMexico.format("HH:mm"),
-          local: slotMexico.local().format("HH:mm"),
-        })
-      }
-    }
+  //       slots.push({
+  //         utc: slotMexico.utc().format(),
+  //         mexico: slotMexico.format("HH:mm"),
+  //         local: slotMexico.local().format("HH:mm"),
+  //       })
+  //     }
+  //   }
 
-    return slots
-  }
+  //   return slots
+  // }
 
-  const slots = computed(() => (selectedDate.value ? generateSlots(selectedDate.value) : []))
+  // const slots = computed(() => (selectedDate.value ? generateSlots(selectedDate.value) : []))
 
 
   watch(modelValue, (val) => {
     isValid.value = !!val
   })
 
-onMounted(() => {
-  document.addEventListener("click", handleClickOutside);
 
-  // console.log(props);
+const getFreeSlots = async (date: string) => {
+
+  try{
+
+    const slots = await $fetch('/api/bookingCall', {
+      method: 'GET',
+      params: {
+        method: 'getAvailableSlots',
+        date: date
+      }
+    })
+
+    console.log(slots, 'slots')
+
+    return slots.data
+
+    
+  } catch (error) {
+    console.log(error, 'error getFreeSlots');
+  }
+
+}
+
+onMounted(async () => {
+  document.addEventListener("click", handleClickOutside);
 
   selectedDate.value = props.bookingData.date.toISOString().split("T")[0];
   userDate.value = new Intl.DateTimeFormat("en-US", {
@@ -121,6 +148,32 @@ onMounted(() => {
     day: "numeric", 
     year: "numeric", 
   }).format(props.bookingData.date);
+
+  function toLocalISODateString(input: string): string {
+    const d = new Date(input);
+
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, "0");
+    const day = String(d.getDate()).padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
+  }
+
+  const rawDate = toLocalISODateString(props.bookingData.date);
+
+
+  const receivedSlots = await getFreeSlots(rawDate);
+
+  slots.value = receivedSlots;
+
+  loader.value = false;
+
+
+
+
+  console.log(receivedSlots, "recievedSlots");
+
+  // console.log(props.bookingData.date, "props.bookingData.date");
   // console.log(selectedDate.value, "selectedDate");
 
 })
@@ -132,6 +185,16 @@ onBeforeUnmount(() => {
 </script>
 
 <style lang="scss">
+
+  .loader{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+
+
   .slot_wrapper{
     width: 100%;
     height: 100%;

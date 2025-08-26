@@ -27,7 +27,6 @@
             <ul class="flex flex-row justify-end pl-0 mb-0 list-none md-max:w-full gap-2">
               <!-- online builder btn  -->
               <!-- <li class="flex items-center">
-                <a class="inline-block px-8 py-2 mb-0 mr-4 text-xs font-bold text-center text-blue-500 uppercase align-middle transition-all ease-in bg-transparent border border-blue-500 border-solid rounded-lg shadow-none cursor-pointer leading-pro hover:-translate-y-px active:shadow-xs hover:border-blue-500 active:bg-blue-500 active:hover:text-blue-500 hover:text-blue-500 tracking-tight-rem hover:bg-transparent hover:opacity-75 hover:shadow-none active:text-white active:hover:bg-transparent" target="_blank" href="https://www.creative-tim.com/builder/soft-ui?ref=navbar-dashboard&amp;_ga=2.76518741.1192788655.1647724933-1242940210.1644448053">Online Builder</a>
               </li> -->
               <li class="flex items-center">
                 <a href="./pages/sign-in.html" class="block px-0 py-2 text-sm font-semibold text-white transition-all ease-nav-brand">
@@ -533,7 +532,7 @@
                 <h6 class="mb-0 dark:text-white">Рейтинг товарів</h6>
               </div>
               <div class="flex-auto p-4">
-                <ProductPieChart/>
+                <ChartsProductPieChart/>
                
               </div>
             </div>
@@ -546,7 +545,7 @@
                 </div>
               </div>
               <div class="overflow-x-auto px-4 py-6">
-                <ActiveUsersChart/>
+                <ChartsActiveUsersChart/>
 
               </div>
             </div>
@@ -554,39 +553,39 @@
         </div>
 
 
-        <footer class="pt-4 ">
+        <!-- <footer class="pt-4 ">
           <div class="w-full px-6 mx-auto">
             <div class="flex flex-wrap items-center -mx-3 lg:justify-between">
               <div class="w-full max-w-full px-3 mt-0 mb-6 shrink-0 lg:mb-0 lg:w-1/2 lg:flex-none">
                 <div class="text-sm leading-normal text-center text-slate-500 lg:text-left">
                   ©
-                  <!-- <script>
-                    document.write(new Date().getFullYear() + ",");
-                  </script> -->
+                
                   made with <i class="fa fa-heart"></i> by
-                  <a href="https://www.creative-tim.com" class="font-semibold text-slate-700 dark:text-white" target="_blank">Creative Tim</a>
+                  <a href="" class="font-semibold text-slate-700 dark:text-white" target="_blank">Cortexum - web</a>
                   for a better web.
                 </div>
               </div>
               <div class="w-full max-w-full px-3 mt-0 shrink-0 lg:w-1/2 lg:flex-none">
                 <ul class="flex flex-wrap justify-center pl-0 mb-0 list-none lg:justify-end">
                   <li class="nav-item">
-                    <a href="https://www.creative-tim.com" class="block px-4 pt-0 pb-1 text-sm font-normal transition-colors ease-in-out text-slate-500" target="_blank">Creative Tim</a>
+                    <a href="" class="block px-4 pt-0 pb-1 text-sm font-normal transition-colors ease-in-out text-slate-500" target="_blank">Cortexum wweb</a>
                   </li>
                   <li class="nav-item">
-                    <a href="https://www.creative-tim.com/presentation" class="block px-4 pt-0 pb-1 text-sm font-normal transition-colors ease-in-out text-slate-500" target="_blank">About Us</a>
+                    <a href="" class="block px-4 pt-0 pb-1 text-sm font-normal transition-colors ease-in-out text-slate-500" target="_blank">About Us</a>
                   </li>
                   <li class="nav-item">
-                    <a href="https://creative-tim.com/blog" class="block px-4 pt-0 pb-1 text-sm font-normal transition-colors ease-in-out text-slate-500" target="_blank">Blog</a>
+                    <a href="" class="block px-4 pt-0 pb-1 text-sm font-normal transition-colors ease-in-out text-slate-500" target="_blank">Blog</a>
                   </li>
                   <li class="nav-item">
-                    <a href="https://www.creative-tim.com/license" class="block px-4 pt-0 pb-1 pr-0 text-sm font-normal transition-colors ease-in-out text-slate-500" target="_blank">License</a>
+                    <a href="" class="block px-4 pt-0 pb-1 pr-0 text-sm font-normal transition-colors ease-in-out text-slate-500" target="_blank">License</a>
                   </li>
                 </ul>
               </div>
             </div>
           </div>
-        </footer>
+        </footer> -->
+      
+      
       </div>
       <!-- end cards -->
     </div>
@@ -597,10 +596,7 @@
 <script setup>
 
     import { ref } from 'vue'
-    import DashBurger from '@/components/shared/DashBurger.vue';
-    import SalesChart from '@/components/SalesChart.vue';
-    import ProductPieChart from '@/components/charts/ProductPieChart.vue';
-    import ActiveUsersChart from '@/components/charts/ActiveUsersChart.vue';
+   
 
 
     const burgerActive = ref(false);

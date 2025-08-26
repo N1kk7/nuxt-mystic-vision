@@ -6,6 +6,7 @@ async function addCallback(event: any) {
 
     const formData = await readMultipartFormData(event);
 
+
     if (!formData) {
         return {
             message: "No data received"
@@ -22,6 +23,8 @@ async function addCallback(event: any) {
 
     const productData = JSON.parse(textField.data.toString());
 
+    console.log(productData, 'product data')
+
     try{
 
 
@@ -32,7 +35,7 @@ async function addCallback(event: any) {
                 phone: productData.phone,
                 contactMethod: productData.contactMethod,
                 timeSlot: productData.timeSlot,
-                dateCallback: new Date(productData.dateCallback),
+                dateCallback: productData.dateCallback,
                 orderTime: productData.orderTime,
                 comment: productData.comment,
                 discountEndAt: productData.discountEndAt,
@@ -47,6 +50,7 @@ async function addCallback(event: any) {
         }
 
     } catch(error) {
+           console.error(error, "DB error in addCallback")
         return {
             message: `${error} Something went wrong`
         }

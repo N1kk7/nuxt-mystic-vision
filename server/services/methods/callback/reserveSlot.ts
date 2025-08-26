@@ -1,8 +1,12 @@
 import prisma from "../../../../prisma/prisma";
 
-async function reserveSlot(props: any) {
+async function reserveSlot(date: string, time: string) {
 
-    const {date, time} = props;
+
+    // const {date, time} = props;
+
+    console.log(date, time, 'received prop')
+
 
     try{
 

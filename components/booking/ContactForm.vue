@@ -53,7 +53,9 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref, watch } from "vue";
+import { reactive, ref, watch, onMounted } from "vue";
+
+const loader = ref(true);
 
 interface ContactData {
   name: string;

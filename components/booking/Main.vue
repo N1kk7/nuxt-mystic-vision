@@ -140,6 +140,17 @@
 
     const currentStep = ref(0);
 
+
+    function toLocalISODateString(input: string): string {
+        const d = new Date(input);
+
+        const year = d.getFullYear();
+        const month = String(d.getMonth() + 1).padStart(2, "0");
+        const day = String(d.getDate()).padStart(2, "0");
+
+        return `${year}-${month}-${day}`;
+    }
+
     // const selectedDate = ref(null);
     // const selectedTime = ref(null);
     
@@ -194,7 +205,7 @@
             id: 1,
             component: markRaw(resolveComponent("BookingSetTime") as Component),
             titleName: "Setting time",
-            method: "next-step",
+            method: "set-slot-reservation",
             nameBtn: "Next",
             value: null, 
             valid: false
@@ -203,7 +214,7 @@
             id: 2,
             component: markRaw(resolveComponent("BookingContactForm") as Component ),
             titleName: "Contacts",
-            method: "next-step",
+            method: "send-data",
             nameBtn: "Next",
             value: null,
             valid: false
@@ -249,23 +260,99 @@
         );
     })
 
+    onMounted(() => {
+        console.log(steps[0].value)
+    })
 
-    const fetchDataHandler = () => {
+    const slotReservation = async () => {
+
+        const selectedDate = toLocalISODateString(steps[0].value) ;
+        const selectedTime = steps[1].value;
+
+        try{
+
+            const setReservation = await $fetch('/api/bookingCall', {
+
+                method: 'POST',
+                params: {
+                    method: "reserveSlot",
+                    date: selectedDate,
+                    time: selectedTime,
+
+                }
+
+            })
+
+
+            return setReservation;
+
+        } catch (error) {
+                console.error(error);
+            return {
+                message: "Something went wrong"
+            }
+        }
+    }
+
+
+    const fetchDataHandler = async () => {
         // console.log('inside fetch')
 
         // console.log(steps[2]);
-        // const selectedDate = steps[0].value;
-        // const selectedTime = steps[1].value;
-        // const filledForm = steps[2].value;
+        const endingDiscountTime = new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString();
+        const selectedDate = toLocalISODateString(steps[0].value);
+        const selectedTime = steps[1].value;
+        const filledForm = steps[2].value;
         // console.log("fetchDataHandler");
         // console.log(
         //     selectedDate,
         //     selectedTime,
         //     filledForm
         // )
+
+        const formData = new FormData();
+
+        const jsonData = {
+            name: filledForm.name,
+            email: filledForm.email,
+            phone: filledForm.phone,
+            contactMethod: 'PHONE_CALL',
+            timeSlot: selectedTime,
+            dateCallback: new Date(selectedDate).toISOString(),
+            orderTime: 'ololo',
+            comment: '',
+            discountEndAt: endingDiscountTime,
+            status: 'WAITING_CALL'
+        }
+
+        console.log(jsonData, 'jsonData');
+
+        formData.append('data', JSON.stringify(jsonData));
+
+        try{
+
+            const fetchData = await $fetch('/api/bookingCall', {
+                method: 'POST',
+                params: {
+                    method: 'addCallback',
+                },
+                body: formData
+            })
+
+            console.log('succesfully fetched', fetchData)
+
+            return {
+                status: 'successfully',
+                data: fetchData
+            }
+
+        } catch (error) {
+            console.error(error.message)
+
+        }
     }
 
-    const nextStep = (method: string) => {
+    const nextStep = async (method: string) => {
 
         console.log("nextStep", method);
 
@@ -278,9 +365,14 @@
             case "send-data":
                 console.log('inside send-data');
                 fetchDataHandler();
-                
                 // currentStep.value++ ;
-                break;
+            break;
+            case "set-slot-reservation":
+                const resultReservation = await slotReservation();
+
+                console.log(resultReservation, 'resultReservation')
+                currentStep.value ++
+            break;
         }
 
          if ( currentStep.value > 1) {
@@ -319,27 +411,27 @@
     }
 
 
-    const createCallback = async () => {
+    // const createCallback = async () => {
 
-        try{
+    //     try{
 
-            const res = await fetch('/api/bookingCall', {
-                method: 'POST',
-                body: JSON.stringify({
-                    name: 'test',
-                    contact: 'test',
-                    dateCallback: '2025-08-25T12:00:00.000Z',
-                    orderTime: '10:00-11:00',
-                    discountEndAt: '2025-08-30T23:59:59.000Z'
-                })
+    //         const res = await fetch('/api/bookingCall', {
+    //             method: 'POST',
+    //             body: JSON.stringify({
+    //                 name: 'test',
+    //                 contact: 'test',
+    //                 dateCallback: '2025-08-25T12:00:00.000Z',
+    //                 orderTime: '10:00-11:00',
+    //                 discountEndAt: '2025-08-30T23:59:59.000Z'
+    //             })
 
-            })
+    //         })
 
-        } catch (error) {
-            console.log(error);
+    //     } catch (error) {
+    //         console.log(error);
 
-        }
-    }
+    //     }
+    // }
 
     // const updateStepValidity = (isValid: boolean) => {
     //     if (isValid) {

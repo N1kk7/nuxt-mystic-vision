@@ -5,7 +5,7 @@ function generateSlots(startHour = 8, endHour = 16, stepMinutes = 30): string[] 
 
     for (let hour = startHour; hour <= endHour; hour++) {
         for (let minute = 0; minute < 60; minute += stepMinutes) {
-        if (hour === endHour && minute > 0) break; // чтобы не было 16:30
+        if (hour === endHour && minute > 0) break; 
         const hh = String(hour).padStart(2, '0');
         const mm = String(minute).padStart(2, '0');
         slots.push(`${hh}:${mm}`);
@@ -17,6 +17,8 @@ return slots;
 
 async function getAvailableSlots(prop: any): Promise<{ message: string; data?: string[]; error?: any }> {
 
+    // console.log(prop, "getAvailableSlots");
+
     const date = new Date(prop as string);
 
     try{
@@ -25,6 +27,8 @@ async function getAvailableSlots(prop: any): Promise<{ message: string; data?: s
             where: { expiresAt: { lt: new Date() } }
         });
 
+        // console.log('next step')
+
         const reservedSlots = await prisma.callbackReservation.findMany({
             where: { date },
             select: { time: true }
@@ -32,9 +36,13 @@ async function getAvailableSlots(prop: any): Promise<{ message: string; data?: s
 
         const allSlots = generateSlots(8, 16, 30);
 
+        // console.log(allSlots, 'allSlots')
+
         const availableSlots = allSlots.filter(slot => 
             !reservedSlots.some(res => res.time === slot)
         );
+
+        // console.log(availableSlots, "availableSlots");
 
         return {
             message: "Success",

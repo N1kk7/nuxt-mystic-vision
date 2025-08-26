@@ -17,11 +17,15 @@ export default defineEventHandler(async (event) => {
 
     const offset = query.offset;
 
+    console.log(query, "query");
+    // return
+
     switch(method) {
         case "GET":
 
             if (query.method === "getAvailableSlots") {
-                return await getAvailableSlots(offset);
+                console.log(query.date)
+                return await getAvailableSlots(query.date);
             } else if (query.method === "getAllCallbacks") {
                 return await getAllCallbacks(offset);
             }
@@ -32,7 +36,9 @@ export default defineEventHandler(async (event) => {
             if(query.method === "addCallback") {
                 return await addCallback(event);
             } else if (query.method === "reserveSlot") {
-                return await reserveSlot(event);
+                // if (query.date && query.time){
+                return await reserveSlot(query.date as string, query.time as string);
+                // }
             }
 
         break;

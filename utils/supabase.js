@@ -1,9 +1,16 @@
-import { createClient } from '@supabase/supabase-js'
+// import { createClient } from '@supabase/supabase-js'
 
-const config = useRuntimeConfig();
-const supabaseUrl = config.public.supabaseUrl;
-const supabaseKey = config.public.supabaseKey;
+// const config = useRuntimeConfig();
+// const supabaseUrl = config.public.supabaseUrl;
+// const supabaseKey = config.public.supabaseKey;
+
+// export const supabase = createClient(supabaseUrl, supabaseKey);
+
+// export default supabase;
+
+import { createClient } from "@supabase/supabase-js";
+
+const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_KEY;
 
 export const supabase = createClient(supabaseUrl, supabaseKey);
-
-export default supabase;

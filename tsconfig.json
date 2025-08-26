@@ -1,6 +1,4 @@
 {
-  // https://nuxt.com/docs/guide/concepts/typescript
-  // "extends": "./.nuxt/tsconfig.json"
   "extends": "./.nuxt/tsconfig.json",
   "compilerOptions": {
     "types": [],
@@ -9,7 +7,7 @@
     "paths": {
       // "@utils/*": ["./utils/*"],
       "@utils/*": ["./utils/*"],
-      "@/*": ["src/*"],
+      "@/*": ["./*"],
       "~/*": ["./*"],
       "#app": [".nuxt/types/app/index.d.ts"],
       "#imports": [".nuxt/types/app/imports.d.ts"],
