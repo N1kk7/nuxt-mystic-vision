@@ -3,9 +3,9 @@
 
     <div class="head flex items-center justify-between px-5 py-5">
         <h1>
-            Аналітика
+            Analitycs
         </h1>
-        <DashBurger/>
+        <!-- <DashBurger/> -->
     </div>
 
     <section
@@ -17,7 +17,7 @@
             <h2
               class="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl"
             >
-              Активні замовлення:
+              Active orders:
             </h2>
 
             <div

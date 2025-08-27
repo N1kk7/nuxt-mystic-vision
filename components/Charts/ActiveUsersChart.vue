@@ -27,7 +27,7 @@ const chartData = {
   labels: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00', '24:00'],
   datasets: [
     {
-      label: 'Активные сейчас',
+      label: 'Active now',
       data: [5, 8, 6, 12, 10, 15, 9],
       borderColor: '#3C91E6',
       backgroundColor: 'rgba(60, 145, 230, 0.2)',
@@ -36,7 +36,7 @@ const chartData = {
       fill: true,
     },
     {
-      label: 'Активные за день',
+      label: 'Active today',
       data: [15, 20, 18, 25, 30, 28, 22],
       borderColor: '#4CAF50',
       backgroundColor: 'rgba(76, 175, 80, 0.2)',

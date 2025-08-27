@@ -48,7 +48,7 @@ function hexToRGBA(hex, alpha = 1) {
 }
 
 const chartData = {
-  labels: ['Товар A', 'Товар B', 'Товар C', 'Товар D', 'Товар E'],
+  labels: ['Item A', 'Item B', 'Item C', 'Item D', 'Item E'],
   datasets: [
     {
       data: [45, 25, 15, 10, 5],

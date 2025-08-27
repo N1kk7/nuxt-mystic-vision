@@ -36,7 +36,7 @@
               </li>
               <li class="flex items-center xl:hidden">
                
-                  <DashBurger/>
+                  <!-- <DashBurger/> -->
 
               </li>
               <!-- <li class="flex items-center pl-4 xl:hidden">
@@ -136,19 +136,19 @@
       <!-- cards -->
       <div class="w-full px-6 py-6 mx-auto">
         <!-- row 1 -->
-        <div class="flex flex-wrap -mx-3">
+        <div class="flex flex-wrap -mx-3 items-stretch">
           <!-- card1 -->
-          <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4">
-            <div class="relative flex flex-col min-w-0 break-words bg-white shadow-xl dark:bg-gray-950 dark:border dark:border-solid dark:border-[var(--dark-border-color)]  dark:shadow-dark-xl rounded-2xl bg-clip-border">
+          <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4 relative">
+            <div class="relative flex flex-col h-full min-w-0 break-words bg-white shadow-xl dark:bg-gray-950 dark:border dark:border-solid dark:border-[var(--dark-border-color)]  dark:shadow-dark-xl rounded-2xl bg-clip-border">
               <div class="flex-auto p-4">
                 <div class="flex flex-row -mx-3">
                   <div class="flex-none w-2/3 max-w-full px-3">
                     <div>
-                      <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase dark:text-white dark:opacity-60">Весь заробіток</p>
-                      <h5 class="mb-2 font-bold dark:text-white">0 грн</h5>
+                      <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase dark:text-white dark:opacity-60">All earnings</p>
+                      <h5 class="mb-2 font-bold dark:text-white">0 $</h5>
                       <p class="mb-0 dark:text-white dark:opacity-60">
                         <span class="text-sm font-bold leading-normal text-emerald-500">+0%</span>
-                        за останній місяць
+                        since last month
                       </p>
                     </div>
                   </div>
@@ -169,7 +169,7 @@
                 <div class="flex flex-row -mx-3">
                   <div class="flex-none w-2/3 max-w-full px-3">
                     <div>
-                      <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase dark:text-white dark:opacity-60">Користувачі</p>
+                      <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase dark:text-white dark:opacity-60">Users</p>
                       <h5 class="mb-2 font-bold dark:text-white">0</h5>
                       <p class="mb-0 dark:text-white dark:opacity-60">
                         <span class="text-sm font-bold leading-normal text-emerald-500">+3%</span>
@@ -194,11 +194,11 @@
                 <div class="flex flex-row -mx-3">
                   <div class="flex-none w-2/3 max-w-full px-3">
                     <div>
-                      <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase dark:text-white dark:opacity-60">Всі клієнти</p>
+                      <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase dark:text-white dark:opacity-60">Bookings</p>
                       <h5 class="mb-2 font-bold dark:text-white">0</h5>
                       <p class="mb-0 dark:text-white dark:opacity-60">
                         <span class="text-sm font-bold leading-normal text-red-600">-0%</span>
-                        за останній місяць
+                        since last month
                       </p>
                     </div>
                   </div>
@@ -219,11 +219,12 @@
                 <div class="flex flex-row -mx-3">
                   <div class="flex-none w-2/3 max-w-full px-3">
                     <div>
-                      <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase dark:text-white dark:opacity-60">Продажі</p>
-                      <h5 class="mb-2 font-bold dark:text-white">0 грн.</h5>
+                      <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase dark:text-white dark:opacity-60">Sales</p>
+                      <h5 class="mb-2 font-bold dark:text-white">0 $.</h5>
                       <p class="mb-0 dark:text-white dark:opacity-60">
                         <span class="text-sm font-bold leading-normal text-emerald-500">+0%</span>
-                        за останній місяць
+                        since last month
+
                       </p>
                     </div>
                   </div>
@@ -242,49 +243,6 @@
         <div class="flex flex-wrap mt-6 -mx-3">
           <SalesChart />
 
-          <div class="w-full max-w-full px-3 lg:w-5/12 lg:flex-none">
-            <div slider class="relative w-full h-full overflow-hidden rounded-2xl">
-              <!-- slide 1 -->
-              <div slide class="absolute w-full h-full transition-all duration-500">
-                <!-- <img class="object-cover h-full" src="./assets/img/carousel-1.jpg" alt="carousel image" /> -->
-                <div class="block text-start ml-12 left-0 bottom-0 absolute right-[15%] pt-5 pb-5 text-white">
-                  <div class="inline-block w-8 h-8 mb-4 text-center text-black bg-white bg-center rounded-lg fill-current stroke-none">
-                    <i class="top-0.75 text-xxs relative text-slate-700 ni ni-camera-compact"></i>
-                  </div>
-                  <h5 class="mb-1 text-white">Get started with Argon</h5>
-                  <p class="dark:opacity-80">There’s nothing I really wanted to do in life that I wasn’t able to get good at.</p>
-                </div>
-              </div>
-
-              <!-- slide 2 -->
-              <div slide class="absolute w-full h-full transition-all duration-500">
-                <!-- <img class="object-cover h-full" src="./assets/img/carousel-2.jpg" alt="carousel image" /> -->
-                <div class="block text-start ml-12 left-0 bottom-0 absolute right-[15%] pt-5 pb-5 text-white">
-                  <div class="inline-block w-8 h-8 mb-4 text-center text-black bg-white bg-center rounded-lg fill-current stroke-none">
-                    <i class="top-0.75 text-xxs relative text-slate-700 ni ni-bulb-61"></i>
-                  </div>
-                  <h5 class="mb-1 text-white">Faster way to create web pages</h5>
-                  <p class="dark:opacity-80">That’s my skill. I’m not really specifically talented at anything except for the ability to learn.</p>
-                </div>
-              </div>
-
-              <!-- slide 3 -->
-              <div slide class="absolute w-full h-full transition-all duration-500">
-                <!-- <img class="object-cover h-full" src="./assets/img/carousel-3.jpg" alt="carousel image" /> -->
-                <div class="block text-start ml-12 left-0 bottom-0 absolute right-[15%] pt-5 pb-5 text-white">
-                  <div class="inline-block w-8 h-8 mb-4 text-center text-black bg-white bg-center rounded-lg fill-current stroke-none">
-                    <i class="top-0.75 text-xxs relative text-slate-700 ni ni-trophy"></i>
-                  </div>
-                  <h5 class="mb-1 text-white">Share with us your design tips!</h5>
-                  <p class="dark:opacity-80">Don’t be afraid to be wrong because you can’t learn anything from a compliment.</p>
-                </div>
-              </div>
-
-              <!-- Control buttons -->
-              <button btn-next class="absolute z-10 w-10 h-10 p-2 text-lg text-white border-none opacity-50 cursor-pointer hover:opacity-100 far fa-chevron-right active:scale-110 top-6 right-4"></button>
-              <button btn-prev class="absolute z-10 w-10 h-10 p-2 text-lg text-white border-none opacity-50 cursor-pointer hover:opacity-100 far fa-chevron-left active:scale-110 top-6 right-16"></button>
-            </div>
-          </div>
         </div>
 
         <!-- cards row 3 -->
@@ -294,7 +252,7 @@
             <div class="relative flex flex-col min-w-0 break-words bg-white border-0 dark:border dark:border-[var(--dark-border-color)] border-solid shadow-xl dark:shadow-dark-xl dark:bg-gray-950 border-black-125 rounded-2xl bg-clip-border">
               <div class="p-4 pb-0 mb-0 rounded-t-4">
                 <div class="flex justify-between">
-                  <h6 class="mb-2 dark:text-white">Останні замовлення</h6>
+                  <h6 class="mb-2 dark:text-white">Recent orders</h6>
                 </div>
               </div>
               <div class="overflow-x-auto">
@@ -307,33 +265,33 @@
                             <!-- <img src="./assets/img/icons/flags/US.png" alt="Country flag" /> -->
                           </div>
                           <div class="ml-6">
-                            <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Замовник:</p>
-                            <h6 class="mb-0 text-sm leading-normal dark:text-white">Василь Васильович</h6>
+                            <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Client:</p>
+                            <h6 class="mb-0 text-sm leading-normal dark:text-white">J. Larse</h6>
                           </div>
                         </div>
                       </td>
                       <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
                         <div class="text-center">
-                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Сумма:</p>
-                          <h6 class="mb-0 text-sm leading-normal dark:text-white">0 грн</h6>
+                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Ammount:</p>
+                          <h6 class="mb-0 text-sm leading-normal dark:text-white">0 $</h6>
                         </div>
                       </td>
                       <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
                         <div class="text-center">
-                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Місто одержувача:</p>
-                          <h6 class="mb-0 text-sm leading-normal dark:text-white">Київ</h6>
+                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Destination ciy:</p>
+                          <h6 class="mb-0 text-sm leading-normal dark:text-white">Cydney</h6>
                         </div>
                       </td>
                       <td class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
                         <div class="flex-1 text-center">
-                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Поштова служба:</p>
-                          <h6 class="mb-0 text-sm leading-normal dark:text-white">Пошта України</h6>
+                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Delivery method:</p>
+                          <h6 class="mb-0 text-sm leading-normal dark:text-white">Express delivery</h6>
                         </div>
                       </td>
                       <td class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
                         <div class="flex-1 text-center">
-                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Статус:</p>
-                          <h6 class="mb-0 text-sm leading-normal dark:text-white">Новий</h6>
+                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Status:</p>
+                          <h6 class="mb-0 text-sm leading-normal dark:text-white">New</h6>
                         </div>
                       </td>
                     </tr>
@@ -344,33 +302,33 @@
                             <!-- <img src="./assets/img/icons/flags/US.png" alt="Country flag" /> -->
                           </div>
                           <div class="ml-6">
-                            <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Замовник:</p>
-                            <h6 class="mb-0 text-sm leading-normal dark:text-white">Василь Васильович</h6>
+                            <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Client:</p>
+                            <h6 class="mb-0 text-sm leading-normal dark:text-white">J. Larse</h6>
                           </div>
                         </div>
                       </td>
                       <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
                         <div class="text-center">
-                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Сумма:</p>
-                          <h6 class="mb-0 text-sm leading-normal dark:text-white">0 грн</h6>
+                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Ammount:</p>
+                          <h6 class="mb-0 text-sm leading-normal dark:text-white">0 $</h6>
                         </div>
                       </td>
                       <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
                         <div class="text-center">
-                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Місто одержувача:</p>
-                          <h6 class="mb-0 text-sm leading-normal dark:text-white">Київ</h6>
+                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Destination ciy:</p>
+                          <h6 class="mb-0 text-sm leading-normal dark:text-white">Cydney</h6>
                         </div>
                       </td>
                       <td class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
                         <div class="flex-1 text-center">
-                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Поштова служба:</p>
-                          <h6 class="mb-0 text-sm leading-normal dark:text-white">Пошта України</h6>
+                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Delivery method:</p>
+                          <h6 class="mb-0 text-sm leading-normal dark:text-white">Express delivery</h6>
                         </div>
                       </td>
                       <td class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
                         <div class="flex-1 text-center">
-                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Статус:</p>
-                          <h6 class="mb-0 text-sm leading-normal dark:text-white">Новий</h6>
+                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Status:</p>
+                          <h6 class="mb-0 text-sm leading-normal dark:text-white">New</h6>
                         </div>
                       </td>
                     </tr>
@@ -381,33 +339,33 @@
                             <!-- <img src="./assets/img/icons/flags/US.png" alt="Country flag" /> -->
                           </div>
                           <div class="ml-6">
-                            <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Замовник:</p>
-                            <h6 class="mb-0 text-sm leading-normal dark:text-white">Василь Васильович</h6>
+                            <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Client:</p>
+                            <h6 class="mb-0 text-sm leading-normal dark:text-white">J. Larse</h6>
                           </div>
                         </div>
                       </td>
                       <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
                         <div class="text-center">
-                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Сумма:</p>
-                          <h6 class="mb-0 text-sm leading-normal dark:text-white">0 грн</h6>
+                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Ammount:</p>
+                          <h6 class="mb-0 text-sm leading-normal dark:text-white">0 $</h6>
                         </div>
                       </td>
                       <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
                         <div class="text-center">
-                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Місто одержувача:</p>
-                          <h6 class="mb-0 text-sm leading-normal dark:text-white">Київ</h6>
+                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Destination ciy:</p>
+                          <h6 class="mb-0 text-sm leading-normal dark:text-white">Cydney</h6>
                         </div>
                       </td>
                       <td class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
                         <div class="flex-1 text-center">
-                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Поштова служба:</p>
-                          <h6 class="mb-0 text-sm leading-normal dark:text-white">Пошта України</h6>
+                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Delivery method:</p>
+                          <h6 class="mb-0 text-sm leading-normal dark:text-white">Express delivery</h6>
                         </div>
                       </td>
                       <td class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
                         <div class="flex-1 text-center">
-                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Статус:</p>
-                          <h6 class="mb-0 text-sm leading-normal dark:text-white">Новий</h6>
+                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Status:</p>
+                          <h6 class="mb-0 text-sm leading-normal dark:text-white">New</h6>
                         </div>
                       </td>
                     </tr>
@@ -418,33 +376,33 @@
                             <!-- <img src="./assets/img/icons/flags/US.png" alt="Country flag" /> -->
                           </div>
                           <div class="ml-6">
-                            <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Замовник:</p>
-                            <h6 class="mb-0 text-sm leading-normal dark:text-white">Василь Васильович</h6>
+                            <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Client:</p>
+                            <h6 class="mb-0 text-sm leading-normal dark:text-white">J. Larse</h6>
                           </div>
                         </div>
                       </td>
                       <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
                         <div class="text-center">
-                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Сумма:</p>
-                          <h6 class="mb-0 text-sm leading-normal dark:text-white">0 грн</h6>
+                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Ammount:</p>
+                          <h6 class="mb-0 text-sm leading-normal dark:text-white">0 $</h6>
                         </div>
                       </td>
                       <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
                         <div class="text-center">
-                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Місто одержувача:</p>
-                          <h6 class="mb-0 text-sm leading-normal dark:text-white">Київ</h6>
+                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Destination ciy:</p>
+                          <h6 class="mb-0 text-sm leading-normal dark:text-white">Cydney</h6>
                         </div>
                       </td>
                       <td class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
                         <div class="flex-1 text-center">
-                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Поштова служба:</p>
-                          <h6 class="mb-0 text-sm leading-normal dark:text-white">Пошта України</h6>
+                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Delivery method:</p>
+                          <h6 class="mb-0 text-sm leading-normal dark:text-white">Express delivery</h6>
                         </div>
                       </td>
                       <td class="p-2  text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
                         <div class="flex-1 text-center">
-                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Статус:</p>
-                          <h6 class="mb-0 text-sm leading-normal dark:text-white">Новий</h6>
+                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Status:</p>
+                          <h6 class="mb-0 text-sm leading-normal dark:text-white">New</h6>
                         </div>
                       </td>
                     </tr>
@@ -456,7 +414,7 @@
           <div class="w-full max-w-full px-3 mt-0 lg:w-5/12 lg:flex-none">
             <div class="border-black/12.5 shadow-xl dark:bg-gray-950 dark:border-[var(--dark-border-color)] dark:shadow-dark-xl relative flex min-w-0 flex-col break-words rounded-2xl border-0 border-solid bg-white bg-clip-border">
               <div class="p-4 pb-0 rounded-t-4">
-                <h6 class="mb-0 dark:text-white">Категорії товарів</h6>
+                <h6 class="mb-0 dark:text-white">Product category</h6>
               </div>
               <div class="flex-auto p-4">
                 <ul class="flex flex-col pl-0 mb-0 rounded-lg">
@@ -529,7 +487,7 @@
           <div class="w-full max-w-full px-3 mt-0 lg:w-5/12 lg:flex-none">
             <div class="border-black/12.5 shadow-xl dark:bg-gray-950 dark:border-[var(--dark-border-color)] dark:shadow-dark-xl relative flex min-w-0 flex-col break-words rounded-2xl border-0 border-solid bg-white bg-clip-border">
               <div class="p-4 pb-0 rounded-t-4">
-                <h6 class="mb-0 dark:text-white">Рейтинг товарів</h6>
+                <h6 class="mb-0 dark:text-white">Items rate</h6>
               </div>
               <div class="flex-auto p-4">
                 <ChartsProductPieChart/>
@@ -541,7 +499,7 @@
             <div class="relative flex flex-col min-w-0 break-words bg-white border-0 dark:border dark:border-[var(--dark-border-color)] border-solid shadow-xl dark:shadow-dark-xl dark:bg-gray-950 border-black-125 rounded-2xl bg-clip-border">
               <div class="p-4 pb-0 mb-0 rounded-t-4">
                 <div class="flex justify-between">
-                  <h6 class="mb-2 dark:text-white">Активність на сайті</h6>
+                  <h6 class="mb-2 dark:text-white">Website activity</h6>
                 </div>
               </div>
               <div class="overflow-x-auto px-4 py-6">

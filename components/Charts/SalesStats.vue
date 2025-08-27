@@ -1,6 +1,6 @@
 <template>
     <div class="bg-white dark:bg-[var(--dark-alter-color)] dark:border dark:border-[var(--dark-border-color)] rounded-lg shadow p-6 space-y-6">
-      <h2 class="text-xl font-semibold">🛒 Продажи и Заказы</h2>
+      <h2 class="text-xl font-semibold">🛒 Sales and Orders</h2>
   
       <canvas ref="salesChart" class="w-full h-64"></canvas>
   
@@ -23,20 +23,20 @@
   const salesChart = ref(null)
   
   const stats = [
-    { label: 'Общий доход', value: '₴124 000' },
-    { label: 'Средний чек', value: '₴620' },
-    { label: 'Кол-во заказов', value: '200' },
-    { label: 'Конверсия', value: '3.5%' }
+    { label: 'Total income', value: '₴124 000' },
+    { label: 'Average bill', value: '₴620' },
+    { label: 'Number of orders', value: '200' },
+    { label: 'Conversion', value: '3.5%' }
   ]
   
   onMounted(() => {
     const chart = new Chart(salesChart.value, {
       type: 'line',
       data: {
-        labels: ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'],
+        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
         datasets: [
           {
-            label: 'Доход',
+            label: 'Income',
             data: [12000, 19000, 3000, 5000, 20000, 30000, 40000],
             fill: false,
             borderColor: '#4f46e5',

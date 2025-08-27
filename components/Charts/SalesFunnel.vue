@@ -1,6 +1,6 @@
 <template>
     <div class="bg-white dark:bg-[var(--dark-alter-color)] dark:border dark:border-[var(--dark-border-color)] rounded-lg shadow p-6 space-y-6">
-      <h2 class="text-xl font-semibold">📈 Воронка продаж</h2>
+      <h2 class="text-xl font-semibold">📈 Sales funnel</h2>
   
       <canvas ref="funnelChart" class="w-full h-64"></canvas>
   
@@ -29,9 +29,9 @@
   const stepRefs = ref([])
   
   const funnelSteps = [
-    { label: 'Добавили в корзину', count: 820 },
-    { label: 'Перешли к оформлению', count: 470 },
-    { label: 'Оплатили', count: 260 }
+    { label: 'Added to cart', count: 820 },
+    { label: 'Proceeded to the checkout', count: 470 },
+    { label: 'Paid', count: 260 }
   ]
   
   onMounted(async () => {

@@ -1,6 +1,8 @@
 import prisma from "../../../../prisma/prisma";
 
-async function getAllCallbacks(props: any) {
+async function getAllCallbacks() {
+
+    console.log('enter getAllCallbacks 1');
 
     try{
 
@@ -10,6 +12,8 @@ async function getAllCallbacks(props: any) {
             }
         })
 
+        console.log(gettingCallbacks, 'gettingCallbacks');
+
         return {
             message: "Success",
             data: gettingCallbacks  
@@ -18,6 +22,7 @@ async function getAllCallbacks(props: any) {
         
 
     } catch (error) {
+        console.error("Prisma callback.findMany error:", error);
         return {
             message: "No data received",
             error: error

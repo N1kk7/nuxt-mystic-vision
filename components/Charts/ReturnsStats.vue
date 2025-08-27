@@ -1,6 +1,6 @@
 <template>
     <div class="bg-white dark:bg-[var(--dark-alter-color)] dark:border dark:border-[var(--dark-border-color)] rounded-lg shadow p-6 space-y-6">
-      <h2 class="text-xl font-semibold">📦 Возвраты / Отмены</h2>
+      <h2 class="text-xl font-semibold">📦 Refunds/Cancellations</h2>
   
       <canvas ref="returnsChart" class="w-full h-64"></canvas>
   
@@ -29,11 +29,11 @@
   const reasonRefs = ref([])
   
   const cancelReasons = [
-    { label: 'Ошибка при оформлении', count: 45 },
-    { label: 'Передумали', count: 32 },
-    { label: 'Нет нужного способа доставки', count: 20 },
-    { label: 'Долгая доставка', count: 17 },
-    { label: 'Нашли дешевле', count: 11 }
+    { label: 'Order mistakes', count: 45 },
+    { label: 'Changed your mind', count: 32 },
+    { label: 'There is no required shipping method', count: 20 },
+    { label: 'Long delivery time', count: 17 },
+    { label: 'Found cheaper', count: 11 }
   ]
   
   onMounted(async () => {
@@ -43,7 +43,7 @@
         labels: cancelReasons.map(r => r.label),
         datasets: [
           {
-            label: 'Кол-во возвратов',
+            label: 'Refunds quantity',
             data: cancelReasons.map(r => r.count),
             backgroundColor: '#ef4444',
             borderRadius: 6,

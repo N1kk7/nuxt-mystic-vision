@@ -27,7 +27,7 @@ export default defineEventHandler(async (event) => {
                 console.log(query.date)
                 return await getAvailableSlots(query.date);
             } else if (query.method === "getAllCallbacks") {
-                return await getAllCallbacks(offset);
+                return await getAllCallbacks();
             }
 
         break;

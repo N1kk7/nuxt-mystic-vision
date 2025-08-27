@@ -2,25 +2,28 @@
   <div
     class="m-0 font-sans text-base antialiased font-normal leading-default bg-gray-50 text-slate-500 dark:bg-[var(--dark-component-color)] dark:text-slate-400"
   >
-    <div class="absolute w-full bg-[var(--primary-color)] dark:bg-[var(--main-dark-color)] min-h-72"></div>
+    <div class="absolute w-full bg-[var(--text-color)] dark:bg-[var(--main-dark-color)] min-h-72"></div>
 
     <aside
-      class="fixed inset-y-0 gap-10 flex flex-col justify-between items-center w-full h-auto p-0 my-4 overflow-y-scroll antialiased transition-transform duration-200 -translate-x-full bg-white dark:bg-[var(--dark-grey)] border-0 dark:border dark:border-[var(--dark-border-color)] shadow-xl dark:shadow-none dark:bg-slate-850 max-w-64 ease-nav-brand z-990 xl:ml-6 rounded-2xl xl:left-0 xl:translate-x-0"
-      :aria-expanded="isSidebarOpen"
+      class="fixed inset-y-0 gap-10 flex flex-col justify-between items-center w-full h-auto p-0 my-4 overflow-y-scroll antialiased transition-transform duration-200 -translate-x-full bg-white dark:bg-[var(--dark-grey)]  dark:border dark:border-[var(--dark-border-color)] shadow-xl dark:shadow-none dark:bg-slate-850 max-w-64 ease-nav-brand z-990 xl:ml-6 rounded-2xl xl:left-0 xl:translate-x-0
+      border border-solid border-[var(--text-color)]
+      "
+      
+    >
+    <!-- :aria-expanded="isSidebarOpen"
       :class="{
         '-translate-x-full z-50': !isSidebarOpen,
         'translate-x-4 z-50': isSidebarOpen,
-      }"
-    >
-      <div>
+      }" -->
+      <div class="w-full px-2">
         <div class="h-19">
           <div
-            class="px-2 py-6 m-0 text-sm whitespace-nowrap text-slate-700 flex justify-center items-center gap-2"
+            class="px-2 py-4 m-0 text-sm whitespace-nowrap text-slate-700 flex justify-center items-center gap-2"
             target="_blank"
           >
             <img
-              src="../public//img/only-dog.png"
-              class="h-auto w-[40px] transition-all duration-200 dark:inline ease-nav-brand bg-[var(--light-color)] p-1 rounded-lg"
+              src="../public/logo.webp"
+              class="h-auto w-[50px] transition-all duration-200 dark:inline ease-nav-brand bg-[var(--light-color)] p-1 rounded-lg"
               alt="main_logo"
             />
             <div class="title-wrapper ml-1 flex items-baseline flex-col">
@@ -44,16 +47,18 @@
           <ul class="flex flex-col pl-0 mb-0">
             <li
               class="mt-0.5 w-full"
-              @click="closeSidebar(), (activePage = 'index')"
             >
+              <!-- @click="closeSidebar(), (activePage = 'index')" -->
+
               <NuxtLink to="/admin/">
                 <div
-                  class="py-[0.675rem] bg-blue-500/13 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap rounded-lg px-4 font-semibold text-slate-700 transition-colors"
-                  :class="{
+                  class="py-[0.675rem] bg-blue-500/13 text-sm ease-nav-brand my-0 mx-0 flex items-center whitespace-nowrap rounded-lg px-2 font-semibold text-slate-700 transition-colors"
+                 
+                >
+                 <!-- :class="{
                     'text-white bg-[var(--primary-color)]':
                       activePage === 'index',
-                  }"
-                >
+                  }" -->
                   <div
                     class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-1.5"
                   >
@@ -70,16 +75,18 @@
 
             <li
               class="mt-0.5 w-full"
-              @click="closeSidebar(), (activePage = 'analytics')"
             >
+              <!-- @click="closeSidebar(), (activePage = 'analytics')" -->
+
               <NuxtLink to="/admin/analytics">
                 <div
-                  class="py-[0.675rem] text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors rounded-lg font-semibold text-slate-700"
-                  :class="{
+                  class="py-[0.675rem] text-sm ease-nav-brand my-0 mx-0 flex items-center whitespace-nowrap px-2 transition-colors rounded-lg font-semibold text-slate-700"
+                 
+                >
+                 <!-- :class="{
                     'text-white bg-[var(--primary-color)]':
                       activePage === 'analytics',
-                  }"
-                >
+                  }" -->
                   <div
                     class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-1.5"
                   >
@@ -96,16 +103,18 @@
 
             <li
               class="mt-0.5 w-full"
-              @click="closeSidebar(), (activePage = 'buyers')"
             >
-              <NuxtLink to="/admin/buyers">
+              <!-- @click="closeSidebar(), (activePage = 'buyers')" -->
+
+              <!-- <NuxtLink to="/admin/buyers"> -->
                 <div
-                  class="py-[0.675rem] text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors rounded-lg font-semibold text-slate-700"
-                  :class="{
+                  class="opacity-30 py-[0.675rem] text-sm ease-nav-brand my-0 mx-0 flex items-center whitespace-nowrap px-2 transition-colors rounded-lg font-semibold text-slate-700"
+                
+                >
+                  <!-- :class="{
                     'text-white bg-[var(--primary-color)]':
                       activePage === 'buyers',
-                  }"
-                >
+                  }" -->
                   <div
                     class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center fill-current stroke-0 text-center xl:p-1.5"
                   >
@@ -117,21 +126,23 @@
                     Buyers
                   </span>
                 </div>
-              </NuxtLink>
+              <!-- </NuxtLink> -->
             </li>
 
             <li
               class="mt-0.5 w-full"
-              @click="closeSidebar(), (activePage = 'notifications')"
             >
-              <NuxtLink to="/admin/notifications">
+              <!-- @click="closeSidebar(), (activePage = 'notifications')" -->
+
+              <!-- <NuxtLink to="/admin/notifications"> -->
                 <div
-                  class="py-[0.675rem] text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors rounded-lg font-semibold text-slate-700"
-                  :class="{
+                  class="opacity-30 py-[0.675rem] text-sm ease-nav-brand my-0 mx-0 flex items-center whitespace-nowrap px-2 transition-colors rounded-lg font-semibold text-slate-700"
+              
+                >
+                    <!-- :class="{
                     'text-white bg-[var(--primary-color)]':
                       activePage === 'notifications',
-                  }"
-                >
+                  }" -->
                   <div
                     class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-1.5"
                   >
@@ -146,21 +157,23 @@
                     Notifications
                   </span>
                 </div>
-              </NuxtLink>
+              <!-- </NuxtLink> -->
             </li>
 
             <li
               class="mt-0.5 w-full"
-              @click="closeSidebar(), (activePage = 'orders')"
             >
+              <!-- @click="closeSidebar(), (activePage = 'orders')" -->
+
               <NuxtLink to="/admin/booking">
                 <div
-                  class="py-[0.675rem] text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors rounded-lg font-semibold text-slate-700"
-                  :class="{
+                  class="py-[0.675rem] text-sm ease-nav-brand my-0 mx-0 flex items-center whitespace-nowrap px-2 transition-colors rounded-lg font-semibold text-slate-700"
+                 
+                >
+                 <!-- :class="{
                     'text-white bg-[var(--primary-color)]':
                       activePage === 'orders',
-                  }"
-                >
+                  }" -->
                   <div
                     class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-1.5"
                   >
@@ -183,16 +196,18 @@
 
             <li
               class="mt-0.5 w-full"
-              @click="closeSidebar(), (activePage = 'payment')"
             >
+              <!-- @click="closeSidebar(), (activePage = 'payment')" -->
+
               <!-- <NuxtLink to="/admin/payment"> -->
                 <div
-                  class="opacity-30 py-[0.675rem] text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors rounded-lg font-semibold text-slate-700"
-                  :class="{
+                  class="opacity-30 py-[0.675rem] text-sm ease-nav-brand my-0 mx-0 flex items-center whitespace-nowrap px-2 transition-colors rounded-lg font-semibold text-slate-700"
+                
+                >
+                  <!-- :class="{
                     'text-white bg-[var(--primary-color)]':
                       activePage === 'payment',
-                  }"
-                >
+                  }" -->
                   <div
                     class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-1.5"
                   >
@@ -212,16 +227,18 @@
 
             <li
               class="mt-0.5 w-full"
-              @click="closeSidebar(), (activePage = 'products')"
             >
+              <!-- @click="closeSidebar(), (activePage = 'products')" -->
+
               <!-- <NuxtLink to="/admin/products"> -->
                 <div
-                  class="opacity-30 py-[0.675rem] text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors rounded-lg font-semibold text-slate-700"
-                  :class="{
+                  class="opacity-30 py-[0.675rem] text-sm ease-nav-brand my-0 mx-0 flex items-center whitespace-nowrap px-2 transition-colors rounded-lg font-semibold text-slate-700"
+                  
+                >
+                <!-- :class="{
                     'text-white bg-[var(--primary-color)]':
                       activePage === 'products',
-                  }"
-                >
+                  }" -->
                   <div
                     class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-1.5"
                   >
@@ -238,16 +255,18 @@
 
             <li
               class="mt-0.5 w-full"
-              @click="closeSidebar(), (activePage = 'settings')"
             >
+              <!-- @click="closeSidebar(), (activePage = 'settings')" -->
+
               <!-- <NuxtLink to="/admin/settings"> -->
                 <div
-                  class="opacity-30 py-[0.675rem] text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors rounded-lg font-semibold text-slate-700"
-                  :class="{
+                  class="opacity-30 py-[0.675rem] text-sm ease-nav-brand my-0 mx-0 flex items-center whitespace-nowrap px-2 transition-colors rounded-lg font-semibold text-slate-700"
+              
+                >
+                    <!-- :class="{
                     'text-white bg-[var(--primary-color)]':
                       activePage === 'settings',
-                  }"
-                >
+                  }" -->
                   <div
                     class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-1.5 "
                   >

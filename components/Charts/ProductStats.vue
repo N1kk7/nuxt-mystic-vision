@@ -1,14 +1,14 @@
 <template>
     <div class="bg-white dark:bg-[var(--dark-alter-color)] dark:border dark:border-[var(--dark-border-color)] rounded-lg shadow p-6 space-y-6">
-      <h2 class="text-xl font-semibold">📦 Товары</h2>
+      <h2 class="text-xl font-semibold">📦 Products</h2>
     <div class="top-row flex justify-between items-start gap-2">
         <div>
-        <h3 class="text-lg font-medium mb-2">Топ продаваемых товаров</h3>
+        <h3 class="text-lg font-medium mb-2">Top sales products</h3>
         <canvas ref="topProductsChart" class="w-full h-64"></canvas>
       </div>
   
       <div>
-        <h3 class="text-lg font-medium mb-2">Товары с низким остатком</h3>
+        <h3 class="text-lg font-medium mb-2">Products with low stock</h3>
         <ul class="list-disc list-inside space-y-1">
           <li v-for="item in lowStockItems" :key="item.name" class="text-red-600">
             {{ item.name }} — {{ item.stock }} шт.
@@ -20,7 +20,7 @@
     
   
       <div>
-        <h3 class="text-lg font-medium mb-2">Товары в избранном</h3>
+        <h3 class="text-lg font-medium mb-2">Products in wishlist</h3>
         <div class="flex flex-wrap gap-4">
       <div
   v-for="item in favorites"
@@ -29,7 +29,7 @@
   class="bg-gray-100 dark:bg-[var(--dark-component-color)] p-4 rounded shadow w-full sm:w-48 text-center"
 >
   <p class="font-semibold text-sm">{{ item.name }}</p>
-  <p class="text-xs text-gray-500 mt-1">{{ item.count }} добавлений</p>
+  <p class="text-xs text-gray-500 mt-1">{{ item.count }} added</p>
 </div>
         </div>
       </div>
@@ -47,22 +47,22 @@
 const favoriteRefs = ref([])
   
   const topSelling = [
-    { name: 'Товар A', sales: 120 },
-    { name: 'Товар B', sales: 95 },
-    { name: 'Товар C', sales: 88 },
-    { name: 'Товар D', sales: 75 }
+    { name: 'Item A', sales: 120 },
+    { name: 'Item B', sales: 95 },
+    { name: 'Item C', sales: 88 },
+    { name: 'Item D', sales: 75 }
   ]
   
   const lowStockItems = [
-    { name: 'Товар X', stock: 3 },
-    { name: 'Товар Y', stock: 5 },
-    { name: 'Товар Z', stock: 1 }
+    { name: 'Item X', stock: 3 },
+    { name: 'Item Y', stock: 5 },
+    { name: 'Item Z', stock: 1 }
   ]
   
   const favorites = [
-    { id: 1, name: 'Товар D', count: 52 },
-    { id: 2, name: 'Товар B', count: 41 },
-    { id: 3, name: 'Товар A', count: 33 }
+    { id: 1, name: 'Item D', count: 52 },
+    { id: 2, name: 'Item B', count: 41 },
+    { id: 3, name: 'Item A', count: 33 }
   ]
   
   onMounted(async () => {
@@ -72,7 +72,7 @@ const favoriteRefs = ref([])
         labels: topSelling.map(p => p.name),
         datasets: [
           {
-            label: 'Продажи',
+            label: 'Sales',
             data: topSelling.map(p => p.sales),
             backgroundColor: '#10b981',
             borderRadius: 6,

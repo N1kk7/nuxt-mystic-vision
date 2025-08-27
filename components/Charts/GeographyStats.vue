@@ -1,6 +1,6 @@
 <template>
     <div class="bg-white dark:bg-[var(--dark-alter-color)] dark:border dark:border-[var(--dark-border-color)] rounded-lg shadow p-6 space-y-6">
-      <h2 class="text-xl font-semibold">📍 География</h2>
+      <h2 class="text-xl font-semibold">📍 GeographyStats</h2>
   
       <div class="flex flex-col md:flex-row gap-6">
         <div class="w-full md:w-1/2">
@@ -15,7 +15,7 @@
               ref="regionRefs"
             >
               <span class="text-sm font-medium">{{ index + 1 }}. {{ item.name }}</span>
-              <span class="text-sm text-gray-700">{{ item.users }} пользователей</span>
+              <span class="text-sm text-gray-700">{{ item.users }} users</span>
             </li>
           </ul>
         </div>
@@ -34,11 +34,11 @@
   const regionRefs = ref([])
   
   const regions = [
-    { name: 'Украина', users: 560 },
-    { name: 'Польша', users: 130 },
-    { name: 'Германия', users: 98 },
-    { name: 'США', users: 82 },
-    { name: 'Канада', users: 43 }
+    { name: 'Ukraine', users: 560 },
+    { name: 'Poland', users: 130 },
+    { name: 'Germany', users: 98 },
+    { name: 'USA', users: 82 },
+    { name: 'Canada', users: 43 }
   ]
   
   onMounted(async () => {

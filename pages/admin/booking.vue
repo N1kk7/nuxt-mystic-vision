@@ -3,7 +3,7 @@
     <div class="admin-container mx-2 pb-2 flex flex-col">
       <div class="top-block flex justify-between items-center mt-5">
         <div class="page-name">
-          <h1 class="mb-0">Товари</h1>
+          <h1 class="mb-0">Bookings</h1>
         </div>
         <div class="flex items-center justify-center gap-5 px-5">
           <div class="nav bg-[#d5ddeb] py-2 px-3 rounded-lg">
@@ -25,7 +25,7 @@
            
           </div>
            
-          <DashBurger />
+          <!-- <DashBurger /> -->
           
         </div>
         
@@ -46,20 +46,22 @@
               placeholder="Пошук"
             />
             <button class="search-btn">
-              <SvgIcon
+              <!-- <SvgIcon
                 name="search-icon"
                 size="micro"
                 fill="var(--dark-color)"
-              />
+              /> -->
             </button>
           </div>
         </div>
         <div class="settings-block flex justify-end items-stretch gap-5 px-5">
           <button class="text-nowrap" @click="openPopup('AddCategory')">
-            Додати категорію
+            Button for something control
           </button>
           <button class="text-nowrap" @click="openPopup('AddProduct')">
-            Додати товар
+            Button for something control
+
+
           </button>
           <!-- <button>
                         <SvgIcon name="burger-menu" size="micro" fill="var(--dark-color)" />
@@ -160,8 +162,8 @@
                       <!-- Data -->
                       <template v-else>
                         <tr
-                          v-for="category in fetchedCategories"
-                          :key="category.id"
+                          v-for="bookings in fetchedBookings"
+                          :key="bookings.id"
                         >
                           <td
                             class="px-6 py-3 align-middle bg-transparent border-b dark:border-white/40"
@@ -245,7 +247,7 @@
               <div
                 class="p-6 pb-0 mb-0 border-b-0 border-b-solid rounded-t-2xl border-b-transparent"
               >
-                <h6 class="dark:text-white">Товари</h6>
+                <h6 class="dark:text-white">Booking list</h6>
               </div>
               <div class="flex-auto px-0 pt-0 pb-2">
                 <div class="p-0 overflow-x-auto">
@@ -257,30 +259,33 @@
                         <th
                           class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b shadow-none dark:border-white/40 dark:text-white text-xs border-b-solid tracking-normal whitespace-nowrap text-slate-400 opacity-70"
                         >
-                          Товар
+                          User name
                         </th>
                         <th
                           class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b shadow-none dark:border-white/40 dark:text-white text-xs border-b-solid tracking-normal whitespace-nowrap text-slate-400 opacity-70"
                         >
-                          Ціна
+                          date/time
+
                         </th>
                         <th
                           class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b shadow-none dark:border-white/40 dark:text-white text-xs border-b-solid tracking-normal whitespace-nowrap text-slate-400 opacity-70"
                         >
-                          Статус товару
+                          email
                         </th>
                         <th
                           class="px-6 py-3 pl-2 font-bold text-center uppercase align-middle bg-transparent border-b shadow-none dark:border-white/40 dark:text-white text-xs border-b-solid tracking-normal whitespace-nowrap text-slate-400 opacity-70"
                         >
-                          Категорія
+                        Status
                         </th>
                         <th
                           class="px-6 py-3 font-semibold capitalize align-middle bg-transparent border-b border-solid shadow-none dark:border-white/40 dark:text-white tracking-normal whitespace-nowrap"
-                        ></th>
+                        >
+                          <!-- Status -->
+                        </th>
                       </tr>
                     </thead>
                     <tbody class="border-t">
-                      <template v-if="loadingProductState">
+                      <template v-if="loadingBookingState">
                         <tr v-for="i in 5" :key="'skeleton-' + i">
                           <!-- Author -->
                           <td
@@ -325,29 +330,30 @@
                       </template>
                       <template v-else>
                         <tr
-                          v-for="product in fetchedProducts"
-                          :key="product.id"
+                          v-for="booking in fetchedBookings"
+                          :key="booking.id"
                         >
                           <td
                             class="p-2 align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent"
                           >
                             <div class="flex px-2">
                               <div>
-                                <img
+                                <!-- <img
                                   :src="product.img[0].path"
                                   class="inline-flex items-center justify-center mr-2 text-sm text-white transition-all duration-200 ease-in-out rounded-full h-9 w-9"
                                   alt="spotify"
-                                />
+                                /> -->
                               </div>
                               <div class="my-auto">
                                 <h6
                                   class="mb-0 text-sm leading-normal dark:text-white"
                                 >
                                   {{
-                                    product.translations.find(
-                                      (translation) =>
-                                        translation.language === "uk"
-                                    ).title
+                                    // product.translations.find(
+                                    //   (translation) =>
+                                    //     translation.language === "uk"
+                                    // ).title
+                                    booking.name
                                   }}
                                 </h6>
                               </div>
@@ -359,13 +365,16 @@
                             <p
                               class="mb-0 text-sm font-semibold leading-normal dark:text-white dark:opacity-60"
                             >
-                              {{ `${product.price} UAH` }}
+                              {{ `${booking.dateCallback}, ${booking.timeSlot}` }}
                             </p>
                           </td>
                           <td
                             class="p-2 align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent"
                           >
-                            <span
+                            <span class="text-xs font-semibold leading-tight dark:text-white dark:opacity-60">
+                              {{ booking.email }}
+                            </span>
+                            <!-- <span
                               v-if="product.visible"
                               class="text-xs font-semibold leading-tight dark:text-white dark:opacity-60"
                               >Активний</span
@@ -375,7 +384,7 @@
                               v-else
                               class="text-xs font-semibold leading-tight dark:text-white dark:opacity-60"
                               >Не активний
-                            </span>
+                            </span> -->
                           </td>
                           <td
                             class="p-2 text-center align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent"
@@ -383,7 +392,9 @@
                             <div class="flex items-center justify-center">
                               <span
                                 class="mr-2 text-xs font-semibold leading-tight dark:text-white dark:opacity-60"
-                                >{{ product.category.group }}</span
+                                >
+                                {{ booking.status }}
+                                </span
                               >
                               <div>
                                 <div
@@ -425,7 +436,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref, watch } from "vue";
+import { onMounted, ref, watch, nextTick } from "vue";
 // import SvgIcon from "@/components/shared/SvgIcon.vue";
 // import { useModalStore } from "#imports";
 // import DashBurger from "@/components/shared/DashBurger.vue";
@@ -433,8 +444,8 @@ import gsap from "gsap";
 
 // const modalStore = useModalStore();
 
-const loadingCategoryState = ref(false);
-const fetchedCategories = ref([]);
+const loadingBookingState = ref(false);
+const fetchedBookings = ref([]);
 const categoryElem = ref(null);
 const loadingProductState = ref(false);
 const fetchedProducts = ref([]);
@@ -446,16 +457,16 @@ const activeGroup = ref("products");
 const openPopup = (modal) => {
   switch (modal) {
     case "AddProduct":
-      modalStore.showModal("AddProduct");
+      // modalStore.showModal("AddProduct");
       break;
     case "AddCategory":
-      modalStore.showModal("AddCategory");
+      // modalStore.showModal("AddCategory");
       break;
   }
 };
 
-watch(fetchedCategories, async () => {
-  console.log("watch fetchedCategories");
+watch(fetchedBookings, async () => {
+  console.log("watch fetchedBookings");
   if (categoryElem.value) {
     const prevHeight = categoryElem.value.clientHeight;
     await nextTick();
@@ -502,27 +513,43 @@ const showGroup = (group) => {
 
 const deleteCategory = (category) => {
   // console.log(category.language.title)
-  modalStore.showModal("DeleteCategory", {
-    categoryId: category.id,
-    categoryName: category.language.title,
-  });
+  // modalStore.showModal("DeleteCategory", {
+  //   categoryId: category.id,
+  //   categoryName: category.language.title,
+  // });
 };
 
-const fetchCategory = async () => {
-  loadingCategoryState.value = true;
+const fetchBookings = async () => {
+  loadingBookingState.value = true;
   try {
-    const getCategories = await $fetch("/api/category");
+    const getBookings = await $fetch("/api/bookingCall", {
+      method: "GET",
+      query: { method: "getAllCallbacks" },
+    });
 
-    if (getCategories.data.length > 0) {
-      fetchedCategories.value = getCategories.data.map((item) => ({
-        ...item,
-        language: item.translations.find(
-          (translation) => translation.language === "uk"
-        ),
-      }));
-    }
-    loadingCategoryState.value = false;
+    // console.log(getBookings.data, "getBookings");
+
+    fetchedBookings.value = getBookings.data;
+
+    console.log(fetchedBookings.value, "fetchedBookings");
+
+    // console.log(getBookings.data, "getBookings");
+
+
+
+    // if (getBookings.data.length > 0) {
+    //   fetchedBookings.value = getBookings.data.map((item) => ({
+    //     ...item,
+    //     language: item.translations.find(
+    //       (translation) => translation.language === "uk"
+    //     ),
+    //   }));
+
+    //   console.log(getBookings, "getBookings");
+    // }
+    loadingBookingState.value = false;
   } catch (error) {
+    // console.log(error);
     console.log(error.message, "Something went wrong");
   }
 };
@@ -544,7 +571,7 @@ const fetchProduct = async () => {
 };
 
 onMounted(() => {
-  fetchProduct();
+  fetchBookings();
 });
 </script>
 
@@ -564,80 +591,6 @@ onMounted(() => {
 .skeleton {
   @apply bg-gray-300 dark:bg-gray-600 animate-pulse;
 }
-// .table-header {
-//   padding: 12px 24px; // px-6 py-3
-//   font-weight: bold; // font-bold
-//   text-align: left; // text-left
-//   text-transform: uppercase; // uppercase
-//   vertical-align: middle; // align-middle
-//   background-color: transparent; // bg-transparent
-//   border-bottom: 1px solid rgba(255, 255, 255, 0.4); // dark:border-white/40
-//   font-size: 12px; // text-xs
-//   letter-spacing: normal; // tracking-normal
-//   color: rgb(148, 163, 184); // text-slate-400
-//   opacity: 0.7; // opacity-70
-// }
-
-// .table-cell {
-//   padding: 8px; // p-2
-//   vertical-align: middle; // align-middle
-//   background-color: transparent; // bg-transparent
-//   border-bottom: 1px solid rgba(255, 255, 255, 0.4); // dark:border-white/40
-//   color: rgb(148, 163, 184); // text-slate-400
-// }
-
-// .skeleton-cell {
-//   padding: 8px; // p-2
-//   vertical-align: middle; // align-middle
-//   background-color: transparent; // bg-transparent
-//   border-bottom: 1px solid rgba(255, 255, 255, 0.4); // dark:border-white/40
-//   display: flex; // flex
-//   align-items: center; // items-center
-// }
-
-// .skeleton {
-//   background-color: rgb(226, 232, 240); // Светло-серый bg-gray-200
-//   animation: pulse 1.5s infinite ease-in-out;
-//   border-radius: 4px;
-// }
-
-// // Анимация скелетона
-// @keyframes pulse {
-//   0% {
-//     opacity: 1;
-//     background-color: rgb(226, 232, 240); // Светлее
-//   }
-//   50% {
-//     opacity: 0.6;
-//     background-color: rgb(203, 213, 225); // Чуть темнее
-//   }
-//   100% {
-//     opacity: 1;
-//     background-color: rgb(226, 232, 240);
-//   }
-// }
-
-// // Для темной темы
-// @media (prefers-color-scheme: dark) {
-//   .skeleton {
-//     background-color: rgb(107, 114, 128); // Светлый серый в темной теме
-//   }
-
-//   @keyframes pulse {
-//     0% {
-//       opacity: 1;
-//       background-color: rgb(107, 114, 128);
-//     }
-//     50% {
-//       opacity: 0.6;
-//       background-color: rgb(75, 85, 99); // Чуть темнее
-//     }
-//     100% {
-//       opacity: 1;
-//       background-color: rgb(107, 114, 128);
-//     }
-//   }
-// }
 
 .admin-container {
   height: -webkit-fill-available;

@@ -1,6 +1,6 @@
 <template>
     <div class="bg-white dark:bg-[var(--dark-alter-color)] dark:border dark:border-[var(--dark-border-color)] rounded-lg shadow p-6 space-y-6">
-      <h2 class="text-xl font-semibold">👤 Пользователи</h2>
+      <h2 class="text-xl font-semibold">👤 Users</h2>
   
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
         <div
@@ -29,9 +29,9 @@
   const statRefs = ref([])
   
   const userStats = [
-    { label: 'Новые регистрации', value: 122 },
-    { label: 'Активные пользователи', value: 378 },
-    { label: 'Повторные покупки', value: '47%' }
+    { label: 'New Users', value: 122 },
+    { label: 'Active Users', value: 378 },
+    { label: 'Repeat purchases', value: '47%' }
   ]
   
   onMounted(async () => {
@@ -41,7 +41,7 @@
         labels: ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'],
         datasets: [
           {
-            label: 'Новые регистрации',
+            label: 'New users',
             data: [12, 19, 3, 5, 20, 30, 24],
             backgroundColor: '#3b82f6',
             borderRadius: 4,

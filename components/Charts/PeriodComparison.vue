@@ -1,6 +1,6 @@
 <template>
     <div class="bg-white dark:bg-[var(--dark-alter-color)] dark:border dark:border-[var(--dark-border-color)] rounded-lg shadow p-6 space-y-6">
-      <h2 class="text-xl font-semibold">📅 Сравнение периодов</h2>
+      <h2 class="text-xl font-semibold">📅 Period comparison</h2>
   
       <canvas ref="comparisonChart" class="w-full h-64"></canvas>
   
@@ -31,18 +31,18 @@
   const metricRefs = ref([])
   
   const comparison = [
-    { label: 'Сегодня vs Вчера', current: 1340, prev: 1200 },
-    { label: 'Этот месяц vs Прошлый', current: 30120, prev: 28800 }
+    { label: 'Today vs Tomorrow', current: 1340, prev: 1200 },
+    { label: 'This month vs Last month', current: 30120, prev: 28800 }
   ]
   
   onMounted(async () => {
     new Chart(comparisonChart.value, {
       type: 'line',
       data: {
-        labels: ['Вчера', 'Сегодня', 'Прошлый месяц', 'Этот месяц'],
+        labels: ['Tomorrow', 'Today', 'Last month', 'This month'],
         datasets: [
           {
-            label: 'Продажи',
+            label: 'Sales',
             data: [comparison[0].prev, comparison[0].current, comparison[1].prev, comparison[1].current],
             fill: false,
             borderColor: '#3b82f6',

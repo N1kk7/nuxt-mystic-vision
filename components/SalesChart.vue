@@ -2,25 +2,25 @@
 <template>
     <div ref="chartWrapper" class="chart-wrapper">
       <div class="top-chart flex items-center justify-between mb-2">
-        <div class="chart-title">Продажі за {{ period }}</div>
+        <div class="chart-title">Sales since {{ period }}</div>
         <div class="chart-btn flex justify-center items-center gap-2">
             <button 
                 class="border border-solid border-[var(--primary-color)] py px-2 rounded-lg bg-[var(--bg-color)] text-[var(--dark-color)]"
-                @click="period = 'рік'"
+                @click="period = 'year'"
             >
-                за рік 
+                year 
             </button>
             <button 
                 class="border border-solid border-[var(--primary-color)] py px-2 rounded-lg bg-[var(--bg-color)] text-[var(--dark-color)]"
-                @click="period = 'місяць'"
+                @click="period = 'month'"
             > 
-                за місяць
+                month
             </button>
             <button 
                 class="border border-solid border-[var(--primary-color)] py px-2 rounded-lg bg-[var(--bg-color)] text-[var(--dark-color)]"
-                @click="period = 'тиждень'"
+                @click="period = 'week'"
             >
-                за тиждень
+                week
             </button>
         </div>
 
@@ -40,7 +40,7 @@
   const canvas = ref<HTMLCanvasElement | null>(null)
   const chartWrapper = ref(null)
 
-  const period = ref('рік')
+  const period = ref('year')
   
   onMounted(() => {
     const ctx = canvas.value!.getContext('2d')!
