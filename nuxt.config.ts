@@ -41,6 +41,7 @@ export default defineNuxtConfig({
       },
       display: 'swap',
     }], 
+    '@pinia/nuxt',
     
     ['@nuxtjs/tailwindcss', {
         exposeConfig: true,

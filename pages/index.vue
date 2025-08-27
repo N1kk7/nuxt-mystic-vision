@@ -1,9 +1,10 @@
 <template>
     <div class="page">
-        <Header />
+        <!-- <Header /> -->
         <!-- <Hero /> -->
-         <BookingMain/>
-        <Footer/>
+         <!-- <BookingMain/> -->
+        <TestComponent/>
+        <!-- <Footer/> -->
 
     </div>
 </template>

@@ -183,7 +183,7 @@
                                 <p
                                   class="mb-0 text-xs text-slate-400 dark:text-white"
                                 >
-                                  john@creative-tim.com
+                                  john@c.com
                                 </p>
                               </div>
                             </div>

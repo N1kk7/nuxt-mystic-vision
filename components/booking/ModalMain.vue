@@ -11,7 +11,9 @@
 
 
                 </div>
-                <DefaultBtn>
+                <DefaultBtn
+                    @click="clearAllData"
+                >
                     close
                 </DefaultBtn>
 
@@ -137,6 +139,9 @@
     import DefaultBtn from '../shared/DefaultBtn.vue';
     import { ref, computed, watch, reactive, markRaw } from 'vue';
 
+    const modalStore = useModalStore();
+
+
 
     const currentStep = ref(0);
     const reservationId = ref('');
@@ -201,12 +206,30 @@
         }
         ])
 
+    const clearAllData = () => {
+
+        currentStep.value = 0;
+        reservationId.value = '';
+        bookOrdered.value = false;
+
+        steps[0].value = null;
+        steps[1].value = null;
+        steps[2].value = null;
+        steps[3].value = null;
+        steps[4].value = null;
+
+        modalStore.closeModal();
+
+
+    }
+
   
 
     const progress = computed(() => ((currentStep.value + 1) / 3) * 100);
 
 
     const bookingData = computed(() => ({
+
         date: steps[0].value,
         time: steps[1].value,
         contact: steps[2].value,
@@ -463,16 +486,16 @@
 
 <style lang="scss">
 .booking{
-    width: 80%;
+    width: 100%;
     margin: 0 auto;
-    height: 80vh;
+    height: 100%;
     background-color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
     .booking_wrapper{
         width: 80vw;
-        height: 70vh;
+        // height: 70vh;
         min-height: 50vh;
         margin: 0 auto;
         border: 1px solid var(--text-color);
@@ -511,6 +534,7 @@
         position: relative;
         width: 100%;
         height: inherit;
+        min-height: 60vh;
         gap: 1em;
 
       

@@ -1,6 +1,6 @@
 <template>
   <div class="layout">
-    <header />
+    <Header />
     <!-- <AppHeader />
     <StickyHeader /> -->
     <!-- <MobileMenu /> -->
@@ -10,7 +10,9 @@
     <!-- <Tooltips v-if="showTooltip" :tooltipStatus="tooltipStatus">
       {{ tooltipMessage }}
     </Tooltips> -->
-    <!-- <Modal @tooltip="tooltip">
+    <!-- <Modal @tooltip="tooltip"> -->
+    <ModalsModal >
+
       <template #default="{ openModal, closeModal }">
         <component
           :is="currentModal"
@@ -19,23 +21,24 @@
           :closeModal="closeModal"
         />
       </template>
-    </Modal> -->
+    </ModalsModal>
     <!-- <Chat /> -->
     <!-- <AppFooter /> -->
-     <footer />
+     <Footer />
   </div>
 </template>
 
 <script setup>
-//   import Modal from "~/components/Modals/Modal.vue";
+  // import header from '@/components/header.vue';
+  // import Modal from "~/components/Modals/Modal.vue";
 //   import Tooltips from "~/components/shared/Tooltips.vue";
 //   import { useModalStore, useAuthStore } from "#imports";
 //   import { onMounted } from "vue";
 
-//   const modalStore = useModalStore();
+  const modalStore = useModalStore();
 //   const authStore = useAuthStore();
-//   const currentModal = computed(() => modalStore.currentModal);
-//   const modalProps = computed(() => modalStore.modalProps);
+  const currentModal = computed(() => modalStore.currentModal);
+  const modalProps = computed(() => modalStore.modalProps);
 
 //   const showTooltip = ref(false);
 //   const tooltipStatus = ref("");

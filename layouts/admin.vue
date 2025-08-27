@@ -306,19 +306,20 @@
             </div>
           </div>
         </div>
-        <a
-          href="https://www.creative-tim.com/learning-lab/tailwind/html/quick-start/argon-dashboard/"
-          target="_blank"
+        <div
+
+
           class="inline-block w-full px-8 py-2 mb-4 text-xs font-bold leading-normal text-center text-white capitalize transition-all ease-in rounded-lg shadow-md bg-slate-700 bg-150 hover:shadow-xs hover:-translate-y-px"
-          >LINK</a
         >
+          LINK
+        </div>
         <!-- pro btn  -->
-        <a
+        <NuxtLink
+          to="/"
           class="inline-block w-full px-8 py-2 text-xs font-bold leading-normal text-center text-white align-middle transition-all ease-in bg-blue-500 border-0 rounded-lg shadow-md select-none bg-150 bg-x-25 hover:shadow-xs hover:-translate-y-px"
-          href="https://www.creative-tim.com/product/argon-dashboard-pro-tailwind?ref=sidebarfree"
-          target="_blank"
-          >Exit</a
         >
+          Exit
+        </NuxtLink>
       </div>
     </aside>
 
