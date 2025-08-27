@@ -6,13 +6,16 @@ export default defineNuxtConfig({
   nitro: {
     compressPublicAssets: true
   },
-  runtimeConfig: {
-    apiSecretPath: "API_SECRET_PATH",
-    apiSecretKey: "API_SECRET_KEY",
-    apiBaseUrl: "API_BASE_URL"
+   runtimeConfig: {
 
+    supabaseKey: process.env.SUPABASE_KEY,
+    supabaseUrl: process.env.SUPABASE_URL,
+    supabaseApiUrl: process.env.SUPABASE_API_URL,
 
-
+    public: {
+      supabaseUrl: process.env.SUPABASE_URL,
+      supabaseApiUrl: process.env.SUPABASE_API_URL,
+    }
   },
   app: {
     baseURL: '/',
