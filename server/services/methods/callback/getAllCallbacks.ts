@@ -2,7 +2,6 @@ import prisma from "../../../../prisma/prisma";
 
 async function getAllCallbacks() {
 
-    console.log('enter getAllCallbacks 1');
 
     try{
 

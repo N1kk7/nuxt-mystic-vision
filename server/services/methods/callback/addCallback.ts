@@ -23,7 +23,6 @@ async function addCallback(event: any) {
 
     const productData = JSON.parse(textField.data.toString());
 
-    console.log(productData, 'product data')
 
     try{
 
@@ -36,7 +35,6 @@ async function addCallback(event: any) {
                 contactMethod: productData.contactMethod,
                 timeSlot: productData.timeSlot,
                 dateCallback: productData.dateCallback,
-                orderTime: productData.orderTime,
                 comment: productData.comment,
                 discountEndAt: productData.discountEndAt,
                 status: productData.status

@@ -365,7 +365,7 @@
                             <p
                               class="mb-0 text-sm font-semibold leading-normal dark:text-white dark:opacity-60"
                             >
-                              {{ `${booking.dateCallback}, ${booking.timeSlot}` }}
+                              {{ `${booking.dateCallback.slice(0, 10)}, ${booking.timeSlot}` }}
                             </p>
                           </td>
                           <td
@@ -415,10 +415,12 @@
                             class="p-2 align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent"
                           >
                             <button
-                              class="inline-block px-5 py-2.5 mb-0 font-bold text-[var(-dark-color)] text-center uppercase align-middle transition-all bg-transparent border-0 rounded-lg shadow-none leading-normal text-sm ease-in bg-150 tracking-tight-rem bg-x-25"
+                              class="inline-block px-5 py-2.5 mb-0 font-bold text-[var(-dark-color)] text-center uppercase align-middle transition-all bg-transparent  rounded-lg shadow-none leading-normal text-sm ease-in bg-150 tracking-tight-rem bg-x-25
+                              border border-slate-700
+                              "
                             >
                               <!-- <i class="text-xs leading-tight fa fa-ellipsis-v dark:text-white dark:opacity-60"></i> -->
-                              Edit
+                              SHOW MORE
                             </button>
                           </td>
                         </tr>

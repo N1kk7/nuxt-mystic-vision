@@ -108,13 +108,13 @@
             >
                 <DefaultBtn
                     class="decline btn"
-                    @click="nextStep('next-step')"
+                    @click="nextStep('decline-discount')"
                 >
                     No, thanks
                 </DefaultBtn>
                 <DefaultBtn
                     class="accept btn"
-                    @click="nextStep('next-step')"
+                    @click="nextStep('approve-discount')"
 
                 >
                     Order now
@@ -139,6 +139,8 @@
 
 
     const currentStep = ref(0);
+    const reservationId = ref('');
+    const bookOrdered = ref(false);
 
 
     function toLocalISODateString(input: string): string {
@@ -150,46 +152,6 @@
 
         return `${year}-${month}-${day}`;
     }
-
-    // const selectedDate = ref(null);
-    // const selectedTime = ref(null);
-    
-    // const formData = reactive({
-    //     date: null,
-    //     time: null,
-    //     contact: {
-    //         name: "",
-    //         email: "",
-    //         phone: "",
-    //         method: ""
-    //     }
-    // })
-
-    // const stepData = ref([
-    //     {
-    //         id: 0,
-    //         component: resolveComponent("BookingSetDate"),
-    //         titleName: "Setting day",
-    //         field: "date",
-    //         valid: false
-
-    //     },
-    //     {
-    //         id: 1,
-    //         component: resolveComponent("BookingSetTime"),
-    //         titleName: "Setting time",
-    //         field: "time",
-    //         valid: false
-    //     },
-    //     {
-    //         id: 2,
-    //         component: resolveComponent("BookingContactForm"),
-    //         titleName: "Contacts",
-    //         field: "contact",
-    //         valid: false
-    //     }
-
-    // ])
 
     const steps = reactive([
         {
@@ -248,6 +210,7 @@
         date: steps[0].value,
         time: steps[1].value,
         contact: steps[2].value,
+        bookOrdered: bookOrdered.value
         // userName: steps[2].value.name
         // orderBook: steps[3].value
     }));
@@ -283,7 +246,6 @@
 
             })
 
-
             return setReservation;
 
         } catch (error) {
@@ -292,6 +254,44 @@
                 message: "Something went wrong"
             }
         }
+    }
+
+    const orderDiscount = async () => {
+
+        const formData = new FormData();
+
+        console.log(reservationId.value, 'reservationId from front')
+
+        const jsonData = {
+            reservationId: reservationId.value,
+        }
+
+        formData.append('data', JSON.stringify(jsonData));
+
+        try{
+
+
+            const updateDiscount = await $fetch('/api/bookingCall', {
+                method: 'PATCH',
+                params: {
+                    method: "updateDiscount",
+                },
+                body: formData
+
+            })
+
+            console.log(updateDiscount, 'updateDiscount');
+
+            return updateDiscount;
+
+        } catch (error) {
+            return {
+                message: "Something went wrong"
+            }
+        }
+
+
+        
     }
 
 
@@ -316,11 +316,10 @@
             name: filledForm.name,
             email: filledForm.email,
             phone: filledForm.phone,
-            contactMethod: 'PHONE_CALL',
+            contactMethod: filledForm.contactMethod,
             timeSlot: selectedTime,
             dateCallback: new Date(selectedDate).toISOString(),
-            orderTime: 'ololo',
-            comment: '',
+            comment: filledForm.comment,
             discountEndAt: endingDiscountTime,
             status: 'WAITING_CALL'
         }
@@ -339,11 +338,11 @@
                 body: formData
             })
 
-            console.log('succesfully fetched', fetchData)
+            // console.log('succesfully fetched', fetchData.data.id)
 
             return {
                 status: 'successfully',
-                data: fetchData
+                id: fetchData.data.id
             }
 
         } catch (error) {
@@ -354,7 +353,7 @@
 
     const nextStep = async (method: string) => {
 
-        console.log("nextStep", method);
+        // console.log("nextStep", method);
 
        
 
@@ -363,15 +362,26 @@
                 currentStep.value++;
                 break;
             case "send-data":
-                console.log('inside send-data');
-                fetchDataHandler();
-                // currentStep.value++ ;
+                // console.log('inside send-data');
+                const fetchedId = await fetchDataHandler();
+                reservationId.value = fetchedId.id;
+                currentStep.value++ ;
             break;
             case "set-slot-reservation":
-                const resultReservation = await slotReservation();
-
-                console.log(resultReservation, 'resultReservation')
+                slotReservation();
+                // console.log(resultReservation, 'resultReservation')
                 currentStep.value ++
+            break;
+            case "approve-discount":
+                bookOrdered.value = true;
+                await orderDiscount();
+                currentStep.value ++
+            break;
+            case "decline-discount":
+
+                document.cookie = "reminder=true; email=" + steps[2].value.email + "; path=/, reservationId=" + reservationId.value + ";";
+                currentStep.value ++
+
             break;
         }
 

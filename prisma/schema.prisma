@@ -18,7 +18,6 @@ model Callback {
   dateCallback  DateTime 
   timeSlot      String
   contactMethod ContactMethod @default(GOOGLE_MEET)
-  orderTime     String 
   comment       String?   
   status        Status     @default(WAITING_CALL)
   discountEndAt DateTime? 

@@ -4,7 +4,8 @@ import {
     addCallback,
     getAvailableSlots,
     getAllCallbacks,
-    reserveSlot
+    reserveSlot,
+    discountStatusUpdate
 } from "../services/callbackServices";
 
 
@@ -17,14 +18,11 @@ export default defineEventHandler(async (event) => {
 
     const offset = query.offset;
 
-    console.log(query, "query");
-    // return
 
     switch(method) {
         case "GET":
 
             if (query.method === "getAvailableSlots") {
-                console.log(query.date)
                 return await getAvailableSlots(query.date);
             } else if (query.method === "getAllCallbacks") {
                 return await getAllCallbacks();
@@ -36,15 +34,14 @@ export default defineEventHandler(async (event) => {
             if(query.method === "addCallback") {
                 return await addCallback(event);
             } else if (query.method === "reserveSlot") {
-                // if (query.date && query.time){
                 return await reserveSlot(query.date as string, query.time as string);
-                // }
             }
 
         break;
         case "PUT":
         break;
         case "PATCH":
+            return await discountStatusUpdate(event);
         break;
         case "DELETE":
         break;

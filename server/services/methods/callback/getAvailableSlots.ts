@@ -17,8 +17,6 @@ return slots;
 
 async function getAvailableSlots(prop: any): Promise<{ message: string; data?: string[]; error?: any }> {
 
-    // console.log(prop, "getAvailableSlots");
-
     const date = new Date(prop as string);
 
     try{
@@ -27,7 +25,6 @@ async function getAvailableSlots(prop: any): Promise<{ message: string; data?: s
             where: { expiresAt: { lt: new Date() } }
         });
 
-        // console.log('next step')
 
         const reservedSlots = await prisma.callbackReservation.findMany({
             where: { date },
@@ -36,13 +33,9 @@ async function getAvailableSlots(prop: any): Promise<{ message: string; data?: s
 
         const allSlots = generateSlots(8, 16, 30);
 
-        // console.log(allSlots, 'allSlots')
-
         const availableSlots = allSlots.filter(slot => 
             !reservedSlots.some(res => res.time === slot)
         );
-
-        // console.log(availableSlots, "availableSlots");
 
         return {
             message: "Success",

@@ -3,11 +3,6 @@ import prisma from "../../../../prisma/prisma";
 async function reserveSlot(date: string, time: string) {
 
 
-    // const {date, time} = props;
-
-    console.log(date, time, 'received prop')
-
-
     try{
 
         await prisma.callbackReservation.deleteMany({
@@ -31,14 +26,10 @@ async function reserveSlot(date: string, time: string) {
 
         return { success: true, reservationId: reservation.id };
 
-        
-
     } catch (error) {
         message: "Something went wrong";
         error
     }
-
-
 }
 
 export default reserveSlot;
