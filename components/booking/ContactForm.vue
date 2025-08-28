@@ -107,7 +107,6 @@ const localValue = reactive<ContactData>({
   comment: ""
 })
 
-// const valid = ref(false)
 const errors = reactive({ name: "", email: "", phone: "", comment: "" })
 const focused = reactive({ name: false, email: false, phone: false, comment: false })
 
@@ -122,7 +121,6 @@ const nameValidation = ():boolean => {
 
   if (!localValue.name || localValue.name.length < 2) {
     errors.name = "The name should be at least 2 characters"
-    // check = false;
     return false;
   } else {
     errors.name = ""
@@ -135,7 +133,6 @@ const emailValidation = ():boolean => {
  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
   if (!emailRegex.test(localValue.email)) {
     errors.email = "Enter correct email"
-    // check = false
     return false;
   } else {
     errors.email = ""
@@ -171,32 +168,6 @@ const commentValidation = ():boolean => {
   }
 }
 
-// const validate = () => {
-//   let check = true
-
-//   // if (!localValue.name || localValue.name.length < 2) {
-//   //   errors.name = "The name should be at least 2 characters"
-//   //   check = false;
-//   //   return;
-//   // } else errors.name = ""
-
-//   // const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-//   // if (!emailRegex.test(localValue.email)) {
-//   //   errors.email = "Enter a valid email"
-//   //   check = false
-//   //   return;
-//   // } else errors.email = ""
-
-//   const phoneRegex = /^[\d\s()+-]{6,20}$/
-//   if (!phoneRegex.test(localValue.phone)) {
-//     errors.phone = "Enter a valid phone number"
-//     check = false
-//     return;
-//   } else errors.phone = ""
-
-//   valid.value = check
-//   emit("update:valid", valid.value)
-// }
 
 const isFormValid = computed(() => {
   return (
@@ -208,7 +179,7 @@ const isFormValid = computed(() => {
 })
 
 watch(isFormValid, (val) => {
-  // emit("update:valid", val)
+
   emit("update:valid", val)
 
 })

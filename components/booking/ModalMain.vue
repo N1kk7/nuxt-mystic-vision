@@ -51,7 +51,6 @@
 
                         </div>
                     </div>
-                    <!-- <progress id="progress" max="100" value="0"></progress> -->
                     <div class="progress">
                         <div 
                             class="progress_value"
@@ -60,11 +59,6 @@
 
                     </div>
                 </div>
-                <!-- <BookingSetDate/> -->
-                <!-- <BookingSetTime/> -->
-                 <!-- <BookingContactForm/> -->
-                <!-- <component :is="stepComponents[currentStep]"></component> -->
-                 <!-- {{ stepComponents[currentStep] }} -->
 
                 <component 
                     :is="steps[currentStep].component"
@@ -72,10 +66,6 @@
                     v-model:valid="steps[currentStep].valid"
                     :booking-data="bookingData"
                 />
-          
-                    <!-- @can-continue="updateStepValidity" -->
-
-
 
             </div>
             <div 
@@ -140,23 +130,10 @@
     import { ref, computed, watch, reactive, markRaw } from 'vue';
 
     const modalStore = useModalStore();
-
-
-
     const currentStep = ref(0);
     const reservationId = ref('');
     const bookOrdered = ref(false);
 
-
-    function toLocalISODateString(input: string): string {
-        const d = new Date(input);
-
-        const year = d.getFullYear();
-        const month = String(d.getMonth() + 1).padStart(2, "0");
-        const day = String(d.getDate()).padStart(2, "0");
-
-        return `${year}-${month}-${day}`;
-    }
 
     const steps = reactive([
         {
@@ -220,10 +197,8 @@
 
         modalStore.closeModal();
 
+    };
 
-    }
-
-  
 
     const progress = computed(() => ((currentStep.value + 1) / 3) * 100);
 
@@ -234,21 +209,8 @@
         time: steps[1].value,
         contact: steps[2].value,
         bookOrdered: bookOrdered.value
-        // userName: steps[2].value.name
-        // orderBook: steps[3].value
+
     }));
-
-    watch(steps, () => {
-        console.log(
-            "recieved props",
-            steps[currentStep.value].value,
-            steps[currentStep.value].valid
-        );
-    })
-
-    onMounted(() => {
-        console.log(steps[0].value)
-    })
 
     const slotReservation = async () => {
 
@@ -283,8 +245,6 @@
 
         const formData = new FormData();
 
-        console.log(reservationId.value, 'reservationId from front')
-
         const jsonData = {
             reservationId: reservationId.value,
         }
@@ -292,7 +252,6 @@
         formData.append('data', JSON.stringify(jsonData));
 
         try{
-
 
             const updateDiscount = await $fetch('/api/bookingCall', {
                 method: 'PATCH',
@@ -303,8 +262,6 @@
 
             })
 
-            console.log(updateDiscount, 'updateDiscount');
-
             return updateDiscount;
 
         } catch (error) {
@@ -313,26 +270,15 @@
             }
         }
 
-
-        
     }
 
 
     const fetchDataHandler = async () => {
-        // console.log('inside fetch')
 
-        // console.log(steps[2]);
         const endingDiscountTime = new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString();
         const selectedDate = toLocalISODateString(steps[0].value);
         const selectedTime = steps[1].value;
         const filledForm = steps[2].value;
-        // console.log("fetchDataHandler");
-        // console.log(
-        //     selectedDate,
-        //     selectedTime,
-        //     filledForm
-        // )
-
         const formData = new FormData();
 
         const jsonData = {
@@ -347,8 +293,6 @@
             status: 'WAITING_CALL'
         }
 
-        console.log(jsonData, 'jsonData');
-
         formData.append('data', JSON.stringify(jsonData));
 
         try{
@@ -360,8 +304,6 @@
                 },
                 body: formData
             })
-
-            // console.log('succesfully fetched', fetchData.data.id)
 
             return {
                 status: 'successfully',
@@ -376,29 +318,31 @@
 
     const nextStep = async (method: string) => {
 
-        // console.log("nextStep", method);
-
-       
-
         switch (method) {
             case "next-step":
+
                 currentStep.value++;
                 break;
+
             case "send-data":
-                // console.log('inside send-data');
+
                 const fetchedId = await fetchDataHandler();
                 reservationId.value = fetchedId.id;
                 currentStep.value++ ;
+
             break;
             case "set-slot-reservation":
+
                 slotReservation();
-                // console.log(resultReservation, 'resultReservation')
-                currentStep.value ++
+                currentStep.value ++;
+
             break;
             case "approve-discount":
+
                 bookOrdered.value = true;
                 await orderDiscount();
                 currentStep.value ++
+
             break;
             case "decline-discount":
 
@@ -437,48 +381,8 @@
                 method: ""
             };
         }
-
         currentStep.value--;
-
-
     }
-
-
-    // const createCallback = async () => {
-
-    //     try{
-
-    //         const res = await fetch('/api/bookingCall', {
-    //             method: 'POST',
-    //             body: JSON.stringify({
-    //                 name: 'test',
-    //                 contact: 'test',
-    //                 dateCallback: '2025-08-25T12:00:00.000Z',
-    //                 orderTime: '10:00-11:00',
-    //                 discountEndAt: '2025-08-30T23:59:59.000Z'
-    //             })
-
-    //         })
-
-    //     } catch (error) {
-    //         console.log(error);
-
-    //     }
-    // }
-
-    // const updateStepValidity = (isValid: boolean) => {
-    //     if (isValid) {
-    //         nextStep();
-    //     }
-    // }
-
-
-    // watch(() => {
-    //     console.log(currentStep.value);
-        
-    // })
-    
-
 
 </script>
 
@@ -495,7 +399,6 @@
     justify-content: center;
     .booking_wrapper{
         width: 80vw;
-        // height: 70vh;
         min-height: 50vh;
         margin: 0 auto;
         border: 1px solid var(--text-color);

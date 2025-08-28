@@ -482,7 +482,7 @@ watch(fetchedBookings, async () => {
   }
 });
 watch(fetchedProducts, async () => {
-  console.log("watch fetchedproducts");
+  // console.log("watch fetchedproducts");
   if (productElem.value) {
     const prevHeight = productElem.value.clientHeight;
     await nextTick();
@@ -513,13 +513,9 @@ const showGroup = (group) => {
   }
 };
 
-const deleteCategory = (category) => {
-  // console.log(category.language.title)
-  // modalStore.showModal("DeleteCategory", {
-  //   categoryId: category.id,
-  //   categoryName: category.language.title,
-  // });
-};
+// const deleteCategory = (category) => {
+
+// };
 
 const fetchBookings = async () => {
   loadingBookingState.value = true;
@@ -529,29 +525,10 @@ const fetchBookings = async () => {
       query: { method: "getAllCallbacks" },
     });
 
-    // console.log(getBookings.data, "getBookings");
-
     fetchedBookings.value = getBookings.data;
 
-    console.log(fetchedBookings.value, "fetchedBookings");
-
-    // console.log(getBookings.data, "getBookings");
-
-
-
-    // if (getBookings.data.length > 0) {
-    //   fetchedBookings.value = getBookings.data.map((item) => ({
-    //     ...item,
-    //     language: item.translations.find(
-    //       (translation) => translation.language === "uk"
-    //     ),
-    //   }));
-
-    //   console.log(getBookings, "getBookings");
-    // }
     loadingBookingState.value = false;
   } catch (error) {
-    // console.log(error);
     console.log(error.message, "Something went wrong");
   }
 };

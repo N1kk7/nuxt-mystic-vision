@@ -48,51 +48,17 @@
 <script setup lang="ts">
 import { ref, watch, computed } from 'vue'
 
-// const modelValue = defineModel<Date | null>(null);
-const modelValue = defineModel<Date | null>({ default: null })
-
+const modelValue = defineModel<Date | null>({ default: null });
 const isValid = defineModel<boolean>("valid", { default: false });
-
 const today = new Date()
 today.setHours(0, 0, 0, 0)
 
 const disabledDates = [{repeat: { weekdays: [1] } }]
 
 
-// const formattedDate = computed(() => {
-//   if (!selectedDate.value) return null
-//   return selectedDate.value.toISOString().split("T")[0] 
-// })
-
-// const formattedDate = computed(() => {
-//   if (!modelValue.value) return null
-//   return new Intl.DateTimeFormat("en-US", {
-//     month: "long",  
-//     day: "numeric", 
-//     year: "numeric", 
-//   }).format(modelValue.value)
-// })
-
-
 watch(modelValue, (val) => {
   isValid.value = !!val
 })
-
-
-
-
-
-// const date = defineModel<Date | null>();
-// const isValid = defineModel<boolean>("valid", { default: false });
-
-// const checkValid = () => {
-//   return isValid.value = !!modelValue.value
-// }
-
-// watch(formattedDate, () => {
-//   console.log(formattedDate.value)
-// })
-
 
 
 </script>
@@ -106,8 +72,6 @@ watch(modelValue, (val) => {
     align-items: center;
     height: -webkit-fill-available;
     width: 80%;
-
-
   }
 
   .calendar{
@@ -160,6 +124,5 @@ watch(modelValue, (val) => {
     font-family: "Proxima Nova", sans-serif;
     line-height: 1.5;
   }
-
 
 </style>

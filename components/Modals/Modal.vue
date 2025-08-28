@@ -20,9 +20,6 @@ import { useModalStore } from '#imports'
 
 import ModalMain from '../booking/ModalMain.vue'
 
-// import BookingMain from '@/components/booking/Main.vue'
-
-
 const modalStore = useModalStore();
 const isVisible = computed(() => modalStore.isVisible);
 const currentModal = computed(() => modalStore.currentModal);
@@ -39,9 +36,6 @@ const modalComponents = {
   ModalMain
 }
 
-// const modalComponents = {
-//   BookingMain,
-// }
 </script>
 
 
