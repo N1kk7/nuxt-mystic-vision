@@ -15,12 +15,12 @@
             Reminder
         </button>
 
-        <button 
+        <!-- <button 
             class="schedule"
             @click="modalStore.showModal('BookingDetails')"
         >
             Show more btn
-        </button>
+        </button> -->
 
         <button 
             class="schedule"

@@ -78,6 +78,8 @@ model Subscription {
   payments          Payment[]
 }
 
+
+
 model Payment {
   id                String      @id @default(cuid())
   stripeId          String      @unique
@@ -94,6 +96,17 @@ model Payment {
 
 }
 
+model SubscriptionPlan {
+  id                String      @id @default(cuid())
+  subName           String
+  monthlyAmount     Int
+  yearlyAmount      Int
+  subDescription    String?
+  paymentLink       String
+  subStatus         SubscriptionPlanStatus
+  
+}
+
 enum SubscriptionStatus {
 
   active
@@ -101,6 +114,13 @@ enum SubscriptionStatus {
   past_due
   canceled
   incomplete
+
+}
+
+enum SubscriptionPlanStatus {
+
+  active
+  deactivate
 
 }
 

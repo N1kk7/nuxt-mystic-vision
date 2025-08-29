@@ -366,12 +366,31 @@
       </template>
     </Modal> -->
 
+    <ModalsModal>
+
+      <template #default="{ openModal, closeModal }">
+        <component
+          :is="currentModal"
+          v-bind="modalProps"
+          :openModal="openModal"
+          :closeModal="closeModal"
+        />
+      </template>
+
+    </ModalsModal>
+
 
   </div>
 </template>
 
 
 <script setup>
+
+
+  const modalStore = useModalStore();
+
+  const currentModal = computed(() => modalStore.currentModal);
+  const modalProps = computed(() => modalStore.modalProps);
 
 
 </script>

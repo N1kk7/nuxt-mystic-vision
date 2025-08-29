@@ -415,6 +415,7 @@
                             class="p-2 align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent"
                           >
                             <button
+                              @click="showMoreBtn(booking)"
                               class="inline-block px-5 py-2.5 mb-0 font-bold text-[var(-dark-color)] text-center uppercase align-middle transition-all bg-transparent  rounded-lg shadow-none leading-normal text-sm ease-in bg-150 tracking-tight-rem bg-x-25
                               border border-slate-700
                               "
@@ -444,7 +445,7 @@ import { onMounted, ref, watch, nextTick } from "vue";
 // import DashBurger from "@/components/shared/DashBurger.vue";
 import gsap from "gsap";
 
-// const modalStore = useModalStore();
+const modalStore = useModalStore();
 
 const loadingBookingState = ref(false);
 const fetchedBookings = ref([]);
@@ -512,6 +513,25 @@ const showGroup = (group) => {
       break;
   }
 };
+
+const showMoreBtn = (bookingInfo) => {
+
+
+  modalStore.showModal("BookingDetails", {
+    id: bookingInfo.id,
+    name: bookingInfo.name,
+    email: bookingInfo.email,
+    phone: bookingInfo.phone,
+    comment: bookingInfo.comment,
+    contactMethod: bookingInfo.contactMethod,
+    dateCallback: bookingInfo.dateCallback,
+    timeSlot: bookingInfo.timeSlot,
+    createdAt: bookingInfo.createdAt,
+    status: bookingInfo.status,
+
+  });
+
+}
 
 // const deleteCategory = (category) => {
 
