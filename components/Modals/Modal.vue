@@ -19,6 +19,11 @@ import { computed } from 'vue'
 import { useModalStore } from '#imports'
 
 import ModalMain from '../booking/ModalMain.vue'
+import Reminder from './Reminder.vue';
+
+//admin
+
+import BookingDetails from './admin/BookingDetails.vue';
 
 const modalStore = useModalStore();
 const isVisible = computed(() => modalStore.isVisible);
@@ -33,7 +38,12 @@ const openModal = (modalName, props = {}) => {
 };
 
 const modalComponents = {
-  ModalMain
+    //admin
+  BookingDetails,
+
+  //main
+  ModalMain,
+  Reminder
 }
 
 </script>

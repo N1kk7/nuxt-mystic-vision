@@ -1,23 +1,11 @@
 <template>
-    <div class="booking">
-        <div class="booking_wrapper">
-            <div class="booking_head">
-                <div class="title">
-					<img src="/images/sphinks.webp" alt="logo" class="footer-logo">
-
-                    <h2>
-                        {{ steps[currentStep].titleName }}
-                    </h2>
-
-
-                </div>
-                <DefaultBtn
-                    @click="clearAllData"
-                >
-                    close
-                </DefaultBtn>
-
-            </div>
+    <div class="modal">
+        <div class="modal_wrapper">
+            <SharedModalHead
+                @cancelBtnMethod="clearAllData"
+            >
+                {{ steps[currentStep].titleName }}
+            </SharedModalHead>
             <div class="booking_content">
                 <div 
                     class="progress_bar"
@@ -111,16 +99,9 @@
                 >
                     Order now
                 </DefaultBtn>
-
             </div>
-
         </div>
-      
     </div>
-
-
-
-
 </template>
 
 
@@ -389,7 +370,7 @@
 
 
 <style lang="scss">
-.booking{
+.modal{
     width: 100%;
     margin: 0 auto;
     height: 100%;
@@ -397,7 +378,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    .booking_wrapper{
+    .modal_wrapper{
         width: 80vw;
         min-height: 50vh;
         margin: 0 auto;
@@ -411,23 +392,7 @@
         overflow: hidden;
 
     }
-    .booking_head{
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 1em;
-        border-bottom: 1px solid var(--text-color);
-        .title{
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            gap: 0.5em;
-        }
-        img{
-            width: 50px;
-        }
-
-    }
+ 
     .booking_content{
         padding: 1em;
         display: flex;

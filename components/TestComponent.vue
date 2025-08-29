@@ -7,6 +7,30 @@
         >
             Schedule feature
         </button>
+          <button 
+            class="schedule"
+            @click="modalStore.showModal('Reminder')"
+
+        >
+            Reminder
+        </button>
+
+        <button 
+            class="schedule"
+            @click="modalStore.showModal('BookingDetails')"
+        >
+            Show more btn
+        </button>
+
+        <button 
+            class="schedule"
+
+        >
+            Subscription feature
+        </button>
+
+
+        
         <!-- <BookingMain/> -->
     </div>
 
@@ -38,6 +62,7 @@ const modalStore = useModalStore()
         display: flex;;
         justify-content: center;
         align-items: center;
+        gap: 1em;
 
         .schedule{
             background: var(--text-color);
