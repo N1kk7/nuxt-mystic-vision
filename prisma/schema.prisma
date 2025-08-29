@@ -13,7 +13,7 @@ datasource db {
 model Callback {
   id            String   @id @default(uuid())
   name          String
-  email         String   @unique
+  email         String   
   phone         String
   dateCallback  DateTime 
   timeSlot      String
@@ -21,6 +21,9 @@ model Callback {
   comment       String?   
   status        Status     @default(WAITING_CALL)
   discountEndAt DateTime? 
+  timeZone      String?
+  country       String?
+  language      String?
   createdAt     DateTime   @default(now())
   reservations  CallbackReservation[]
 }
@@ -45,3 +48,68 @@ enum ContactMethod {
   GOOGLE_MEET
   SOMEWHERE_ELSE
 }
+
+
+model User {
+  id          String      @id @default(cuid())
+  email       String      @unique
+  name        String
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  stripeCustomerId  String
+
+  subscriptions Subscription[]
+  payments      Payment[]
+}
+
+model Subscription {
+  id                String      @id @default(cuid())
+  stripeId          String      @unique 
+  userId            String? 
+  email             String    
+  status            SubscriptionStatus
+  startDate         DateTime
+  currentPeriodEnd  DateTime
+  createdAt         DateTime
+  updatedAt         DateTime
+
+  user              User?       @relation(fields: [userId], references: [id])
+  payments          Payment[]
+}
+
+model Payment {
+  id                String      @id @default(cuid())
+  stripeId          String      @unique
+  subscriptionId    String?
+  userId            String?
+  amount            Int
+  currency          String      @default("usd")    
+  status            PaymentStatus
+  paidAt            DateTime
+
+
+  subscription      Subscription? @relation(fields: [subscriptionId], references: [id])
+  user              User?         @relation(fields: [userId], references: [id])
+
+}
+
+enum SubscriptionStatus {
+
+  active
+  trialing
+  past_due
+  canceled
+  incomplete
+
+}
+
+enum PaymentStatus {
+  pending
+  succeeded
+  failed
+  refunded
+}
+
+
+
